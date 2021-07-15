@@ -52,11 +52,6 @@ public class DataBaseConnection  implements Closeable {
         }
 
     }
-
-    public static void main(String[] args) throws SQLException {
-        DataBaseConnection dataBaseConnection = new DataBaseConnection();
-        System.out.println(dataBaseConnection);
-    }
 }
 
 
