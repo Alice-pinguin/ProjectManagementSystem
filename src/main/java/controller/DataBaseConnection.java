@@ -1,6 +1,6 @@
 package controller;
 
-import lombok.SneakyThrows;
+
 import utils.PropertiesLoader;
 
 import java.io.Closeable;
