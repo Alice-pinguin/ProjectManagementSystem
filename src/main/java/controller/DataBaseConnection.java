@@ -1,13 +1,12 @@
 package controller;
 
 import lombok.SneakyThrows;
+
 import utils.PropertiesLoader;
 
 import java.io.Closeable;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DataBaseConnection  implements Closeable {
 
@@ -16,48 +15,33 @@ public class DataBaseConnection  implements Closeable {
     private static final String URL = PropertiesLoader.getProperty("url");
     private static final String JDBC_DRIVER = PropertiesLoader.getProperty("driver");
     private static DataBaseConnection dataBaseConnection;
-    private  Connection connection;
+    private static Connection connection;
 
-
-    public DataBaseConnection()throws SQLException {
-        try {
-            Class.forName(JDBC_DRIVER);
-        }  catch (ClassNotFoundException e) {
-            throw new ClassCastException("No data found");
-        }
-        this.connection = DriverManager.getConnection(URL, user_name, password);
+    @SneakyThrows
+    private DataBaseConnection() {
+        Class.forName(JDBC_DRIVER);
+        connection = DriverManager.getConnection(URL, user_name, password);
     }
 
-
-    private DataBaseConnection getInstance() throws SQLException {
+    @SneakyThrows
+    public static DataBaseConnection getInstance() {
         if (dataBaseConnection == null || getConnection().isClosed()) {
             dataBaseConnection = new DataBaseConnection();
         }
         return dataBaseConnection;
     }
 
-    private  Connection getConnection() {
-       return connection;
+    public static Connection getConnection() {
+        return connection;
     }
 
-
-
-
+    @SneakyThrows
     @Override
     public void close() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-           throw new RuntimeException("Connection doesn't closed");
-        }
-
-    }
-
-    public static void main(String[] args) throws SQLException {
-        DataBaseConnection dataBaseConnection = new DataBaseConnection();
-        System.out.println(dataBaseConnection);
+        connection.close();
     }
 }
+
 
 
 
