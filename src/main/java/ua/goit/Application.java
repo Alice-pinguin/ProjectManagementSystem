@@ -1,10 +1,9 @@
 package ua.goit;
 
 
-import lombok.extern.slf4j.Slf4j;
 import ua.goit.controller.DataBaseConnection;
-import ua.goit.model.Developers;
-import ua.goit.service.maintables.DevelopersService;
+import ua.goit.model.Companies;
+import ua.goit.service.CompanyService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,9 +16,11 @@ public class Application {
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
        Connection connection =  dataBaseConnection.getConnection();
         System.out.println(connection);
-        DevelopersService developersService = new DevelopersService();
-        List<Developers> developer  = developersService.read(2L);
-        System.out.println(developer);
+
+        CompanyService companyService  = new CompanyService();
+        List<Companies> companiesList = companyService.findAll();
+        Companies company = companyService.findByID(0L);
+        System.out.println(company);
 
 
     }

@@ -17,8 +17,6 @@ public class DataBaseConnection  implements Closeable {
     private static final String URL = PropertiesLoader.getProperty("url");
     private static final String JDBC_DRIVER = PropertiesLoader.getProperty("driver");
     private static Connection connection;
-
-
     private HikariDataSource dataSource;
 
     public DataBaseConnection(){
