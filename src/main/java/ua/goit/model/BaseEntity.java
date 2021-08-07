@@ -2,5 +2,5 @@ package ua.goit.model;
 
 @FunctionalInterface
 public interface BaseEntity<ID> {
-    ID getById();
+    ID getId();
 }

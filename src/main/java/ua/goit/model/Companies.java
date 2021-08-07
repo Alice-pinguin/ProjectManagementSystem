@@ -22,7 +22,6 @@ public class Companies implements Serializable, BaseEntity<Long> {
     private String name;
     private String city;
 
-
 }
 
 

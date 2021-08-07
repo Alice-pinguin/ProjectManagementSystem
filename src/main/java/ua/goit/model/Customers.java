@@ -25,4 +25,5 @@ public class Customers implements BaseEntity<Long>, Serializable {
         private Long companyId;
         private Long projectId;
 
-}
+        }
+
