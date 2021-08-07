@@ -1,7 +1,6 @@
 package ua.goit.service;
 
 import ua.goit.controller.DataBaseConnection;
-import ua.goit.model.Customers;
 import ua.goit.model.Projects;
 import ua.goit.repository.BaseRepository;
 
@@ -53,8 +52,8 @@ public class ProjectsService implements BaseRepository<Long, Projects> {
     }
 
     @Override
-    public Projects findByID(Long aLong) throws SQLException {
-        return null;
+    public Projects findByID(Long id) throws SQLException {
+        return projectsList.get(Math.toIntExact(id));
     }
 
     @Override

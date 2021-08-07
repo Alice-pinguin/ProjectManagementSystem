@@ -67,6 +67,5 @@ public  class CompanyService  implements BaseRepository<Long, Companies> {
         }
         return companiesList;
     }
-
     }
 

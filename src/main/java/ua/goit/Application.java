@@ -1,8 +1,9 @@
 package ua.goit;
 
-
 import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Companies;
+import ua.goit.model.CompaniesProjects;
+import ua.goit.service.CompanyProjectService;
 import ua.goit.service.CompanyService;
 
 import java.sql.Connection;
@@ -20,7 +21,11 @@ public class Application {
         CompanyService companyService  = new CompanyService();
         List<Companies> companiesList = companyService.findAll();
         Companies company = companyService.findByID(0L);
-        System.out.println(company);
+        System.out.println(companiesList);
+
+        CompanyProjectService companyProjectService = new CompanyProjectService();
+        List<CompaniesProjects> companiesProjects = companyProjectService.findAll();
+        System.out.println(companiesProjects);
 
 
     }

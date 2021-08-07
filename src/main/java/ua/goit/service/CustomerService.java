@@ -42,7 +42,7 @@ public class CustomerService  implements BaseRepository<Long, Customers> {
     @Override
     public void delete(Long id) throws SQLException {
         PreparedStatement delete = connection.prepareStatement
-                ("DELETE from homework.developers where id_customer=?");
+                ("DELETE from homework.customers where id_customer=?");
         delete.execute();
         delete.close();
 
