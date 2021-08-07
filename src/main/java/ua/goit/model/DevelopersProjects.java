@@ -18,12 +18,12 @@ public class DevelopersProjects implements BaseEntity<Long>, Serializable {
     @Serial
     private static final long serialVersionUID = -5031849844298978951L;
 
-    private Long developerID;
-    private Long projectID;
+    private Long developerId;
+    private Long projectId;
 
     @Override
     public Long getId() {
-        return developerID;
+        return developerId;
     }
 }
 

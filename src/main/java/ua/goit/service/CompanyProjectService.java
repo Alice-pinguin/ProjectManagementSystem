@@ -1,9 +1,8 @@
 package ua.goit.service;
 
 import ua.goit.controller.DataBaseConnection;
-import ua.goit.model.Companies;
+
 import ua.goit.model.CompaniesProjects;
-import ua.goit.model.Projects;
 import ua.goit.repository.BaseRepository;
 
 import java.sql.*;
