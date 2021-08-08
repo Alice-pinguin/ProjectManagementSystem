@@ -5,7 +5,11 @@ import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Companies;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +25,7 @@ public  class CompanyService  implements BaseRepository<Long, Companies> {
                 "INSERT INTO homework.companies (id_company ,name, City) VALUES (?,?,?)");
         create.setLong(1, companies.getId());
         create.setString(2, companies.getName());
-        create.setString(2, companies.getCity());
+        create.setString(3, companies.getCity());
         create.executeUpdate();
         create.close();
         return companies;
@@ -67,5 +71,7 @@ public  class CompanyService  implements BaseRepository<Long, Companies> {
         }
         return companiesList;
     }
-    }
+
+
+}
 

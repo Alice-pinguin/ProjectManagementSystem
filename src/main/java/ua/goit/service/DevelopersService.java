@@ -4,7 +4,11 @@ import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Developers;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +21,12 @@ public class DevelopersService implements BaseRepository<Long, Developers> {
     @Override
     public Developers create(Developers developers) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
-                "INSERT INTO homework.developers (id_developer ,name, Age, Gender) VALUES (?,?,?)");
+                "INSERT INTO homework.developers (id_developer ,name, Age, Gender, salary) VALUES (?,?,?,?,?)");
         create.setLong(1, developers.getId());
         create.setString(2, developers.getName());
-        create.setLong(1, developers.getAge());
-        create.setString(2, developers.getGender());
+        create.setLong(3, developers.getAge());
+        create.setString(4, developers.getGender());
+        create.setLong(5, developers.getSalary());
         create.executeUpdate();
         create.close();
         return developers;

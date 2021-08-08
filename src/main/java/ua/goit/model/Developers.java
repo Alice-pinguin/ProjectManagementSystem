@@ -29,7 +29,6 @@ import java.io.Serializable;
     private Integer age;
     private String gender;
     private Long salary;
-    private Long companyID;
 
    @Override
    public Long getId() {

@@ -1,11 +1,14 @@
 package ua.goit.service;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.DevelopersSkills;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +18,13 @@ public class DeveloperSkillService implements BaseRepository<Long, DevelopersSki
     Connection connection = dataBaseConnection.getConnection();
     List<DevelopersSkills> developersSkillsList = new ArrayList<>();
 
+
     @Override
     public DevelopersSkills create(DevelopersSkills developersSkills) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.developers_skills (id_developer ,id_skill) VALUES (?,?)");
         create.setLong(1, developersSkills.getDeveloperId());
-        create.setLong(1, developersSkills.getSkillsId());
+        create.setLong(2, developersSkills.getSkillsId());
         create.executeUpdate();
         create.close();
         return developersSkills;
@@ -64,4 +68,6 @@ public class DeveloperSkillService implements BaseRepository<Long, DevelopersSki
         }
         return developersSkillsList;
     }
-}
+
+    }
+

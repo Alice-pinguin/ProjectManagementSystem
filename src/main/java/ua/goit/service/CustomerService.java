@@ -4,7 +4,11 @@ import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Customers;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +24,8 @@ public class CustomerService  implements BaseRepository<Long, Customers> {
                 "INSERT INTO homework.customers (id_customer, Name,City, Industry) VALUES (?,?,?,?)");
         create.setLong(1, customers.getId());
         create.setString(2, customers.getName());
-        create.setString(2, customers.getCity());
-        create.setString(2, customers.getIndustry());
+        create.setString(3, customers.getCity());
+        create.setString(4, customers.getIndustry());
         create.executeUpdate();
         create.close();
         return customers;
@@ -33,7 +37,7 @@ public class CustomerService  implements BaseRepository<Long, Customers> {
                 ("UPDATE homework.customers set Name=?, City=?, Industry=? WHERE id_customer=" + id + ";");
         update.setString(1, customers.getName());
         update.setString(2, customers.getCity());
-        update.setString(2, customers.getIndustry());
+        update.setString(3, customers.getIndustry());
         update.execute();
         update.close();
         return customers;

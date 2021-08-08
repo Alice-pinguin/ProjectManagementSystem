@@ -34,7 +34,7 @@ public class DataBaseConnection  implements Closeable {
         config.setDriverClassName(JDBC_DRIVER);
         config.setUsername(user_name);
         config.setPassword(password);
-        config.setMaximumPoolSize(10);
+        config.setMaximumPoolSize(20);
         config.setIdleTimeout(10_000);
         config.setConnectionTimeout(10_000);
         dataSource = new HikariDataSource(config);

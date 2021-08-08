@@ -4,7 +4,11 @@ import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.DevelopersProjects;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +22,7 @@ public class DeveloperProjectService implements BaseRepository<Long, DevelopersP
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.developers_projects (id_developer ,id_project) VALUES (?,?)");
         create.setLong(1, developersProjects.getDeveloperId());
-        create.setLong(1, developersProjects.getProjectId());
+        create.setLong(2, developersProjects.getProjectId());
         create.executeUpdate();
         create.close();
         return developersProjects;

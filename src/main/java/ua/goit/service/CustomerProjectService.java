@@ -1,11 +1,14 @@
 package ua.goit.service;
 
 import ua.goit.controller.DataBaseConnection;
-import ua.goit.model.CompaniesProjects;
 import ua.goit.model.CustomersProjects;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class CustomerProjectService implements BaseRepository<Long, CustomersPro
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.customers_projects (id_customer ,id_project) VALUES (?,?)");
         create.setLong(1, customersProjects.getCustomerId());
-        create.setLong(1, customersProjects.getProjectId());
+        create.setLong(2, customersProjects.getProjectId());
         create.executeUpdate();
         create.close();
         return customersProjects;

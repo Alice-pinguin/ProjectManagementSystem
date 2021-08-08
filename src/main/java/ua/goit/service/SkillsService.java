@@ -4,7 +4,11 @@ import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Skills;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +24,7 @@ public class SkillsService implements BaseRepository<Long, Skills> {
                 "INSERT INTO homework.skills (id_skill ,Language, Level) VALUES (?,?,?)");
         create.setLong(1, skills.getId());
         create.setString(2, skills.getLanguage());
-        create.setString(2, skills.getLevel());
+        create.setString(3, skills.getLevel());
         create.executeUpdate();
         create.close();
         return skills;
