@@ -18,11 +18,11 @@ public class CustomersProjects implements BaseEntity<Long>, Serializable {
     @Serial
     private static final long serialVersionUID = -817675371517504518L;
 
-    private Long projectId;
-    private Long customerId;
+    private Long id_project;
+    private Long id_customer;
 
     @Override
     public Long getId() {
-        return projectId;
+        return id_project;
     }
 }

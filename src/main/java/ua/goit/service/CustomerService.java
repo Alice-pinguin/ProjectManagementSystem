@@ -22,7 +22,7 @@ public class CustomerService  implements BaseRepository<Long, Customers> {
     public Customers create(Customers customers) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.customers (id_customer, Name,City, Industry) VALUES (?,?,?,?)");
-        create.setLong(1, customers.getId());
+        create.setLong(1, customers.getId_customer());
         create.setString(2, customers.getName());
         create.setString(3, customers.getCity());
         create.setString(4, customers.getIndustry());
@@ -63,7 +63,7 @@ public class CustomerService  implements BaseRepository<Long, Customers> {
         ResultSet resultSet = statement.executeQuery("SELECT * from homework.customers");
         while (resultSet.next()){
             Customers customer = Customers.builder()
-                    .id(resultSet.getLong("id_customer"))
+                    .id_customer(resultSet.getLong("id_customer"))
                     .name(resultSet.getString("name"))
                     .city(resultSet.getString("City"))
                     .industry(resultSet.getString("industry"))

@@ -23,8 +23,8 @@ public class DeveloperSkillService implements BaseRepository<Long, DevelopersSki
     public DevelopersSkills create(DevelopersSkills developersSkills) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.developers_skills (id_developer ,id_skill) VALUES (?,?)");
-        create.setLong(1, developersSkills.getDeveloperId());
-        create.setLong(2, developersSkills.getSkillsId());
+        create.setLong(1, developersSkills.getId_developer());
+        create.setLong(2, developersSkills.getId_skill());
         create.executeUpdate();
         create.close();
         return developersSkills;
@@ -34,7 +34,7 @@ public class DeveloperSkillService implements BaseRepository<Long, DevelopersSki
     public DevelopersSkills update(Long id, DevelopersSkills developersSkills) throws SQLException {
         PreparedStatement update = connection.prepareStatement
                 ("UPDATE homework.developers_skills set id_skill=? WHERE id_developer=" + id + ";");
-        update.setLong(1, developersSkills.getSkillsId());
+        update.setLong(1, developersSkills.getId_skill());
         update.execute();
         update.close();
         return developersSkills;
@@ -61,8 +61,8 @@ public class DeveloperSkillService implements BaseRepository<Long, DevelopersSki
         ResultSet resultSet = statement.executeQuery("SELECT * from homework.developers_skills");
         while (resultSet.next()){
             DevelopersSkills developerSkill = DevelopersSkills.builder()
-                    .developerId(resultSet.getLong("id_developer"))
-                    .skillsId(resultSet.getLong("id_skill"))
+                    .id_developer(resultSet.getLong("id_developer"))
+                    .id_skill(resultSet.getLong("id_skill"))
                     .build();
             developersSkillsList.add(developerSkill);
         }

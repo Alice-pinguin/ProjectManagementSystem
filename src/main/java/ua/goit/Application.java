@@ -4,15 +4,17 @@ import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Companies;
 import ua.goit.model.CompaniesProjects;
 import ua.goit.service.CompanyProjectService;
-import ua.goit.service.CompanyService;
-
+import ua.goit.service.CompanyService;;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import java.util.List;
 
 
 public class Application {
+
+
 
     public static void main(String[] args) throws SQLException {
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
@@ -23,18 +25,14 @@ public class Application {
         List<Companies> companiesList = companyService.findAll();
         Companies company = companyService.findByID(0L);
         System.out.println(companiesList);
-        System.out.println(company);
+     //   System.out.println(company);
 
         CompanyProjectService companyProjectService = new CompanyProjectService();
         List<CompaniesProjects> companiesProjects = companyProjectService.findAll();
         System.out.println(companiesProjects);
 
-        Companies company6 = companyService.create(Companies.builder()
-                .id(6L)
-                .name("LuxOff")
-                .city("Rivne")
-                .build());
-        System.out.println(company6);
+
+
 
     }
 }

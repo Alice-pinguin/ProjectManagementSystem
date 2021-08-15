@@ -24,7 +24,7 @@ import java.io.Serializable;
     @Serial
     private static final long serialVersionUID = -8414974451787675055L;
 
-    private Long developerID;
+    private Long id_developer;
     private String name;
     private Integer age;
     private String gender;
@@ -32,6 +32,6 @@ import java.io.Serializable;
 
    @Override
    public Long getId() {
-      return developerID;
+      return id_developer;
    }
 }

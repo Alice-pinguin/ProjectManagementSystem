@@ -1,6 +1,7 @@
 package ua.goit.service;
 
 import ua.goit.controller.DataBaseConnection;
+import ua.goit.model.Developers;
 import ua.goit.model.Projects;
 import ua.goit.repository.BaseRepository;
 
@@ -11,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ProjectsService implements BaseRepository<Long, Projects> {
 
@@ -22,12 +24,12 @@ public class ProjectsService implements BaseRepository<Long, Projects> {
     @Override
     public Projects create(Projects projects) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
-                "INSERT INTO homework.projects (id_project ,name, Field) VALUES (?,?,?)");
-        create.setLong(1, projects.getId());
+                "INSERT INTO homework.projects (id_project ,name, Field,creation_date, cost) VALUES (?,?,?,?,?)");
+        create.setLong(1, projects.getId_project());
         create.setString(2, projects.getName());
-        create.setString(2, projects.getField());
-        create.setString(2, projects.getCreateDate());
-        create.setLong(1, projects.getCost());
+        create.setString(3, projects.getField());
+        create.setString(4, projects.getCreateDate());
+        create.setLong(5, projects.getCost());
         create.executeUpdate();
         create.close();
         return projects;
@@ -38,9 +40,9 @@ public class ProjectsService implements BaseRepository<Long, Projects> {
         PreparedStatement update = connection.prepareStatement
                 ("UPDATE homework.projects set name=?, Field=?,creation_date=?, cost=? WHERE id_project=" + id + ";");
         update.setString(1, projects.getName());
-        update.setString(1, projects.getField());
-        update.setString(1, projects.getCreateDate());
-        update.setLong(2, projects.getCost());
+        update.setString(2, projects.getField());
+        update.setString(3, projects.getCreateDate());
+        update.setLong(4, projects.getCost());
         update.execute();
         update.close();
         return projects;
@@ -66,7 +68,7 @@ public class ProjectsService implements BaseRepository<Long, Projects> {
         ResultSet resultSet = statement.executeQuery("SELECT * from homework.projects");
         while (resultSet.next()) {
             Projects project = Projects.builder()
-                    .id(resultSet.getLong("id_project"))
+                    .id_project(resultSet.getLong("id_project"))
                     .name(resultSet.getString("name"))
                     .field(resultSet.getString("field"))
                     .cost(resultSet.getLong("cost"))
@@ -75,5 +77,26 @@ public class ProjectsService implements BaseRepository<Long, Projects> {
         }
         return projectsList;
     }
+
+    public List<Developers> findDev(Long id) throws SQLException {
+        List<Developers> byProject = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM homework.developers d, homework.skills s, homework.developers_skills ds\n" +
+                "where s.level='Middle' and d.id_developer=ds.id_developer and s.id_skill=ds.id_skill;");
+        while (resultSet.next()) {
+            Developers developer  = Developers.builder()
+                    .id_developer(resultSet.getLong("id_developer"))
+                    .age(resultSet.getInt("age"))
+                    .gender(resultSet.getString("Gender"))
+                    .build();
+                    byProject.add(developer);
+
+
+        }
+return byProject;
+
+    }
 }
+
+
 

@@ -13,17 +13,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class DevelopersProjects implements BaseEntity<Long>, Serializable {
+public class DevelopersProjects  implements BaseEntity<Long>, Serializable {
 
     @Serial
     private static final long serialVersionUID = -5031849844298978951L;
 
-    private Long developerId;
-    private Long projectId;
+    private Long id_developer;
+    private Long id_project;
 
     @Override
     public Long getId() {
-        return developerId;
+        return id_developer;
     }
 }
 

@@ -18,10 +18,14 @@ public class Companies implements Serializable, BaseEntity<Long> {
     @Serial
     private static final long serialVersionUID = 5773288014188515682L;
 
-    private Long id;
+    private Long id_company;
     private String name;
     private String city;
 
+    @Override
+    public Long getId() {
+        return id_company;
+    }
 }
 
 

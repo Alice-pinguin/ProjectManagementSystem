@@ -21,8 +21,8 @@ public class DeveloperProjectService implements BaseRepository<Long, DevelopersP
     public DevelopersProjects create(DevelopersProjects developersProjects) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.developers_projects (id_developer ,id_project) VALUES (?,?)");
-        create.setLong(1, developersProjects.getDeveloperId());
-        create.setLong(2, developersProjects.getProjectId());
+        create.setLong(1, developersProjects.getId_developer());
+        create.setLong(2, developersProjects.getId_project());
         create.executeUpdate();
         create.close();
         return developersProjects;
@@ -32,7 +32,7 @@ public class DeveloperProjectService implements BaseRepository<Long, DevelopersP
     public DevelopersProjects update(Long id, DevelopersProjects developersProjects) throws SQLException {
         PreparedStatement update = connection.prepareStatement
                 ("UPDATE homework.developers_projects set id_project=? WHERE id_developer=" + id + ";");
-        update.setLong(1, developersProjects.getProjectId());
+        update.setLong(1, developersProjects.getId_project());
         update.execute();
         update.close();
         return developersProjects;
@@ -58,8 +58,8 @@ public class DeveloperProjectService implements BaseRepository<Long, DevelopersP
         ResultSet resultSet = statement.executeQuery("SELECT * from homework.developers_projects");
         while (resultSet.next()){
             DevelopersProjects developersProject = DevelopersProjects.builder()
-                    .developerId(resultSet.getLong("id_developer"))
-                    .projectId(resultSet.getLong("id_project"))
+                    .id_developer(resultSet.getLong("id_developer"))
+                    .id_project(resultSet.getLong("id_project"))
                     .build();
             developersProjectsList.add(developersProject);
         }

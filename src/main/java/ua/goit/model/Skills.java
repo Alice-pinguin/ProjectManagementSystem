@@ -18,9 +18,12 @@ public class Skills implements BaseEntity<Long>, Serializable {
     @Serial
     private static final long serialVersionUID = -8495286847326134262L;
 
-    private Long id;
+    private Long id_skill;
     private String Language;
     private String level;
 
-
+    @Override
+    public Long getId() {
+        return id_skill;
+    }
 }

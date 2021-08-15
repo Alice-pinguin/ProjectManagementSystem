@@ -22,7 +22,7 @@ public class SkillsService implements BaseRepository<Long, Skills> {
     public Skills create(Skills skills) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.skills (id_skill ,Language, Level) VALUES (?,?,?)");
-        create.setLong(1, skills.getId());
+        create.setLong(1, skills.getId_skill());
         create.setString(2, skills.getLanguage());
         create.setString(3, skills.getLevel());
         create.executeUpdate();
@@ -35,7 +35,7 @@ public class SkillsService implements BaseRepository<Long, Skills> {
         PreparedStatement update = connection.prepareStatement
                 ("UPDATE homework.skills set Language=?,Level=? WHERE id_skill=" + id + ";");
         update.setString(1, skills.getLanguage());
-        update.setString(1, skills.getLevel());
+        update.setString(2, skills.getLevel());
         update.execute();
         update.close();
         return skills;
@@ -60,7 +60,7 @@ public class SkillsService implements BaseRepository<Long, Skills> {
         ResultSet resultSet = statement.executeQuery("SELECT * from homework.skills");
         while (resultSet.next()){
             Skills skill = Skills.builder()
-                    .id(resultSet.getLong("id_skill"))
+                    .id_skill(resultSet.getLong("id_skill"))
                     .Language(resultSet.getString("language"))
                     .level(resultSet.getString("level"))
                     .build();
