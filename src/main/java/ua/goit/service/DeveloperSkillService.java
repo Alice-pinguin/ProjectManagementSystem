@@ -1,30 +1,20 @@
 package ua.goit.service;
 
-import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.DevelopersSkills;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
-public class DeveloperSkillService implements BaseRepository<Long, DevelopersSkills> {
-
-    DataBaseConnection dataBaseConnection = new DataBaseConnection();
-    Connection connection = dataBaseConnection.getConnection();
-    List<DevelopersSkills> developersSkillsList = new ArrayList<>();
-
+public class DeveloperSkillService  extends QueryConnection<DevelopersSkills> implements BaseRepository<Long, DevelopersSkills> {
 
     @Override
     public DevelopersSkills create(DevelopersSkills developersSkills) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.developers_skills (id_developer ,id_skill) VALUES (?,?)");
-        create.setLong(1, developersSkills.getId_developer());
-        create.setLong(2, developersSkills.getId_skill());
+        create.setLong(1, developersSkills.getDeveloperId());
+        create.setLong(2, developersSkills.getSkillId());
         create.executeUpdate();
         create.close();
         return developersSkills;
@@ -34,7 +24,7 @@ public class DeveloperSkillService implements BaseRepository<Long, DevelopersSki
     public DevelopersSkills update(Long id, DevelopersSkills developersSkills) throws SQLException {
         PreparedStatement update = connection.prepareStatement
                 ("UPDATE homework.developers_skills set id_skill=? WHERE id_developer=" + id + ";");
-        update.setLong(1, developersSkills.getId_skill());
+        update.setLong(1, developersSkills.getSkillId());
         update.execute();
         update.close();
         return developersSkills;
@@ -52,21 +42,12 @@ public class DeveloperSkillService implements BaseRepository<Long, DevelopersSki
 
     @Override
     public DevelopersSkills findByID(Long id) throws SQLException {
-        return developersSkillsList.get(Math.toIntExact(id));
+        return ;
     }
 
     @Override
     public List<DevelopersSkills> findAll() throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * from homework.developers_skills");
-        while (resultSet.next()){
-            DevelopersSkills developerSkill = DevelopersSkills.builder()
-                    .id_developer(resultSet.getLong("id_developer"))
-                    .id_skill(resultSet.getLong("id_skill"))
-                    .build();
-            developersSkillsList.add(developerSkill);
-        }
-        return developersSkillsList;
+
     }
 
     }

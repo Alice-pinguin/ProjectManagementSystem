@@ -1,29 +1,21 @@
 package ua.goit.service;
 
-
-import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Companies;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 
-public  class CompanyService  implements BaseRepository<Long, Companies> {
-    DataBaseConnection dataBaseConnection = new DataBaseConnection();
-    Connection connection = dataBaseConnection.getConnection();
-    List <Companies> companiesList = new ArrayList<>();
+public  class CompanyService extends QueryConnection<Companies>  implements BaseRepository<Long, Companies> {
+
 
     @Override
     public Companies create(Companies companies) throws SQLException {
         PreparedStatement create = connection.prepareStatement(
                 "INSERT INTO homework.companies (id_company ,name, City) VALUES (?,?,?)");
-        create.setLong(1, companies.getId_company());
+        create.setLong(1, companies.getId());
         create.setString(2, companies.getName());
         create.setString(3, companies.getCity());
         create.executeUpdate();
@@ -53,25 +45,13 @@ public  class CompanyService  implements BaseRepository<Long, Companies> {
 
     @Override
     public Companies findByID(Long id) throws SQLException {
-        return companiesList.get(Math.toIntExact(id));
+        return ;
 
     }
 
     @Override
     public List<Companies> findAll() throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * from homework.companies");
-        while (resultSet.next()){
-            Companies company = Companies.builder()
-                    .id_company(resultSet.getLong("id_company"))
-                    .name(resultSet.getString("name"))
-                    .city(resultSet.getString("city"))
-                    .build();
-            companiesList.add(company);
-        }
-        return companiesList;
     }
-
 
 }
 

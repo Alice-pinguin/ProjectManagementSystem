@@ -1,22 +1,13 @@
 package ua.goit.service;
 
-import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.Skills;
 import ua.goit.repository.BaseRepository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
-public class SkillsService implements BaseRepository<Long, Skills> {
-    DataBaseConnection dataBaseConnection = new DataBaseConnection();
-    Connection connection = dataBaseConnection.getConnection();
-    List<Skills> skillsList = new ArrayList<>();
-
+public class SkillsService extends QueryConnection<Skills> implements BaseRepository<Long, Skills> {
 
     @Override
     public Skills create(Skills skills) throws SQLException {
@@ -51,21 +42,11 @@ public class SkillsService implements BaseRepository<Long, Skills> {
 
     @Override
     public Skills findByID(Long id) throws SQLException {
-        return skillsList.get(Math.toIntExact(id));
+        return;
     }
 
     @Override
     public List<Skills> findAll() throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * from homework.skills");
-        while (resultSet.next()){
-            Skills skill = Skills.builder()
-                    .id_skill(resultSet.getLong("id_skill"))
-                    .Language(resultSet.getString("language"))
-                    .level(resultSet.getString("level"))
-                    .build();
-            skillsList.add(skill);
-        }
-        return skillsList;
+
     }
 }
