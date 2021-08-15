@@ -9,7 +9,7 @@ public interface SQLExecutor<E extends BaseEntity<ID>, ID> {
 
     Long getTotalSalaryDevelopersByProject(Long id) throws SQLException;
 
-    List<E> getListOfDevelopersForProject(Long id) throws SQLException;
+    List<E> getListOfDevelopersFromProject(Long id) throws SQLException;
 
     List<E> getDevelopersBySkill(String skill) throws SQLException;
 
