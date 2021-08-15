@@ -7,6 +7,7 @@ CREATE TABLE developers (
                             Name varchar(55) NOT NULL,
                             Age int(2),
                             Gender varchar(10),
+                            salary long not null,
                             PRIMARY KEY (id_developer)
 );
 
@@ -20,6 +21,8 @@ CREATE TABLE projects (
                           id_project int NOT NULL AUTO_INCREMENT,
                           Name varchar(100) NOT NULL,
                           Field varchar(20) NOT NULL,
+                          cost  long NOT NULL,
+                          creation_date date not null,
                           PRIMARY KEY (id_project));
 
 CREATE TABLE companies (
