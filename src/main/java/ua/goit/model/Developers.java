@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import ua.goit.model.BaseEntity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -18,20 +17,23 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "developers")
 
  public class Developers implements BaseEntity<Long>, Serializable {
 
     @Serial
     private static final long serialVersionUID = -8414974451787675055L;
 
-    private Long id_developer;
+    @Id
+    @Column(name = "id_developer")
+    private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "age")
     private Integer age;
+    @Column(name = "gender")
     private String gender;
+    @Column(name = "id_salary")
     private Long salary;
 
-   @Override
-   public Long getId() {
-      return id_developer;
-   }
 }
