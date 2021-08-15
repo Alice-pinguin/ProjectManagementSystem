@@ -1,14 +1,11 @@
 package ua.goit.controller;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.SneakyThrows;
 import ua.goit.utils.PropertiesLoader;
 
 import java.io.Closeable;
 import java.sql.Connection;
-
-
+import java.sql.DriverManager;
 
 public class DataBaseConnection  implements Closeable {
 
@@ -16,35 +13,30 @@ public class DataBaseConnection  implements Closeable {
     private static final String password = PropertiesLoader.getProperty("password");
     private static final String URL = PropertiesLoader.getProperty("url");
     private static final String JDBC_DRIVER = PropertiesLoader.getProperty("driver");
-    private static Connection connection;
-    private HikariDataSource dataSource;
+    private static DataBaseConnection dataBaseConnection;
+    private final Connection connection;
 
-    public DataBaseConnection(){
-        connection = createDataSource();
+    @SneakyThrows
+    private DataBaseConnection() {
+        Class.forName(JDBC_DRIVER);
+        this.connection = DriverManager.getConnection(URL, user_name,password);
     }
 
     @SneakyThrows
-    public Connection getConnection() {
-        return dataSource.getConnection();
+    public static DataBaseConnection getInstance() {
+        if (dataBaseConnection == null || dataBaseConnection.connection.isClosed()) {
+            dataBaseConnection = new DataBaseConnection();
+        }
+        return dataBaseConnection;
     }
 
-    private Connection createDataSource() {
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(URL);
-        config.setDriverClassName(JDBC_DRIVER);
-        config.setUsername(user_name);
-        config.setPassword(password);
-        config.setMaximumPoolSize(20);
-        config.setIdleTimeout(10_000);
-        config.setConnectionTimeout(10_000);
-        dataSource = new HikariDataSource(config);
+    public  Connection getConnection() {
         return connection;
     }
 
     @SneakyThrows
     @Override
     public void close() {
-        getConnection().close();
+        connection.close();
     }
-
 }
