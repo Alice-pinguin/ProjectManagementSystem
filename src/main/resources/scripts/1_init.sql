@@ -4,38 +4,38 @@ use homework;
 
 CREATE TABLE developers (
                             id_developer int NOT NULL AUTO_INCREMENT,
-                            Name varchar(55) NOT NULL,
-                            Age int(2),
-                            Gender varchar(10),
+                            name varchar(55) NOT NULL,
+                            age int(2),
+                            gender varchar(10),
                             salary long not null,
                             PRIMARY KEY (id_developer)
 );
 
 CREATE TABLE skills (
                         id_skill int NOT NULL AUTO_INCREMENT,
-                        Language varchar(10),
-                        Level varchar(10),
+                        language varchar(10),
+                        level varchar(10),
                         PRIMARY KEY (id_skill));
 
 CREATE TABLE projects (
                           id_project int NOT NULL AUTO_INCREMENT,
-                          Name varchar(100) NOT NULL,
-                          Field varchar(20) NOT NULL,
+                          name varchar(100) NOT NULL,
+                          field varchar(20) NOT NULL,
                           cost  long NOT NULL,
-                          creation_date date not null,
+                          create_date date not null,
                           PRIMARY KEY (id_project));
 
 CREATE TABLE companies (
                            id_company int NOT NULL AUTO_INCREMENT,
-                           Name varchar(20) NOT NULL,
-                           City varchar(20) NOT NULL,
+                           name varchar(20) NOT NULL,
+                           city varchar(20) NOT NULL,
                            PRIMARY KEY (id_company));
 
 CREATE TABLE customers (
                            id_customer int NOT NULL AUTO_INCREMENT,
-                           Name varchar(25) NOT NULL,
-                           City varchar(20) NOT NULL,
-                           Industry varchar (20) NOT NULL,
+                           name varchar(25) NOT NULL,
+                           city varchar(20) NOT NULL,
+                           industry varchar (20) NOT NULL,
                            PRIMARY KEY (id_customer));
 
 CREATE TABLE developers_skills (
