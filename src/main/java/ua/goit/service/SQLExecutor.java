@@ -15,9 +15,7 @@ public interface SQLExecutor<E extends BaseEntity<ID>, ID> {
 
     List<E> getDeveloperByLevel(String level) throws SQLException;
 
-    List<E> projectWithCountDevAndDate();
-
-
+    List<E> projectWithCountDevAndDate(Long id) throws SQLException;
 
 }
 
