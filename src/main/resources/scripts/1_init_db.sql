@@ -8,8 +8,7 @@ CREATE TABLE developers (
                             age int(2),
                             gender varchar(10),
                             salary long not null,
-                            PRIMARY KEY (id_developer)
-);
+                            PRIMARY KEY (id_developer));
 
 CREATE TABLE skills (
                         id_skill int NOT NULL AUTO_INCREMENT,
