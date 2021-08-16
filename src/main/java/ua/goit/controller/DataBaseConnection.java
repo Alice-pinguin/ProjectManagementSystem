@@ -9,10 +9,10 @@ import java.sql.DriverManager;
 
 public class DataBaseConnection  implements Closeable {
 
-    private static final String user_name = PropertiesLoader.getProperty("name");
-    private static final String password = PropertiesLoader.getProperty("password");
-    private static final String URL = PropertiesLoader.getProperty("url");
-    private static final String JDBC_DRIVER = PropertiesLoader.getProperty("driver");
+    private static final String user_name = PropertiesLoader.getProperty("db.username");
+    private static final String password = PropertiesLoader.getProperty("db.password");
+    private static final String URL = PropertiesLoader.getProperty("db.url");
+    private static final String JDBC_DRIVER = PropertiesLoader.getProperty("db.driver");
     private static DataBaseConnection dataBaseConnection;
     private final Connection connection;
 
