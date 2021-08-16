@@ -1,6 +1,6 @@
 package ua.goit.model;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.Serial;
 import java.io.Serializable;
-
 
 @Data
 @Builder
@@ -19,21 +17,29 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity(name = "developers")
 
- public class Developers implements BaseEntity<Long>, Serializable {
+public class Developers implements BaseEntity<Long>, Serializable {
 
-    @Serial
     private static final long serialVersionUID = -8414974451787675055L;
 
     @Id
-    @Column(name = "id_developer")
+    @Column(name = "id_developer", table = "developers")
+    @JsonProperty("id")
     private Long id;
-    @Column(name = "name")
+
+    @Column(name = "name", table = "developers")
+    @JsonProperty("name")
     private String name;
-    @Column(name = "age")
+
+    @Column(name = "age", table = "developers")
+    @JsonProperty("age")
     private Integer age;
-    @Column(name = "gender")
+
+    @Column(name = "gender", table = "developers")
+    @JsonProperty("gender")
     private String gender;
-    @Column(name = "id_salary")
+
+    @Column(name = "id_salary", table = "developers")
+    @JsonProperty("salary")
     private Long salary;
 
 }

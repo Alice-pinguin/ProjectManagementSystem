@@ -1,4 +1,4 @@
-package ua.goit.service;
+package ua.goit.repository;
 
 import ua.goit.model.BaseEntity;
 

@@ -1,16 +1,14 @@
 package ua.goit.model;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.io.Serial;
 import java.io.Serializable;
 
 @Data
@@ -21,18 +19,20 @@ import java.io.Serializable;
 
 public class CompaniesProjects implements BaseEntity<Long>, Serializable {
 
-    @Serial
     private static final long serialVersionUID = -3991285155798398357L;
 
-
     @Id
-    @Column(name = "id_company")
+    @Column(name = "id_company", table = "companies_projects")
+    @JsonProperty("id_company")
     private Long companyId;
-    @Column(name = "id_project")
+
+    @Column(name = "id_project", table = "companies_projects")
+    @JsonProperty("id_project")
     private Long projectId;
 
     @Override
     public Long getId() {
         return companyId;
     }
+
 }

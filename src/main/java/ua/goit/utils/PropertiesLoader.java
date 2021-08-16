@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class PropertiesLoader {
 
-    private static final String properties_name = "db.properties";
+    private static final String properties_name = "application_properties";
 
     private static final Properties properties;
 
