@@ -4,7 +4,7 @@ import ua.goit.model.BaseEntity;
 import java.util.List;
 import java.util.Optional;
 
-public interface BaseRepository<E extends BaseEntity<ID>, ID> {
+public interface CrudRepository<E extends BaseEntity<ID>, ID> {
 
     //E save(E e); todo (instead of create and update)
 
