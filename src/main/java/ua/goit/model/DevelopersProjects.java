@@ -22,12 +22,10 @@ public class DevelopersProjects implements BaseEntity<Long>, Serializable {
     private static final long serialVersionUID = -5031849844298978951L;
 
     @Id
-    @Column(name = "id_developer", table = "developers_projects")
-    @JsonProperty("id_developer")
+    @Column(name = "id_developer")
     private Long delevoperId;
 
-    @Column(name = "id_project", table = "developers_projects")
-    @JsonProperty("id_project")
+    @Column(name = "id_project")
     private Long projectId;
 
     @Override

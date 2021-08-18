@@ -22,14 +22,13 @@ public class Companies implements Serializable, BaseEntity<Long> {
     private static final long serialVersionUID = 5773288014188515682L;
 
     @Id
-    @Column(name = "id", table = "companies")
-    @JsonProperty("id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", table = "companies")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "city", table = "companies")
+    @Column(name = "city")
     private String city;
 
 }

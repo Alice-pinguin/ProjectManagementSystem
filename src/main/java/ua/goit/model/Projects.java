@@ -22,24 +22,19 @@ public class Projects implements BaseEntity<Long>, Serializable {
     private static final long serialVersionUID = -1377026457906295951L;
 
     @Id
-    @Column(name = "id_project", table = "projects")
-    @JsonProperty("id")
+    @Column(name = "id_project")
     private Long id;
 
-    @Column(name = "name", table = "projects")
-    @JsonProperty("name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "field", table = "projects")
-    @JsonProperty("field")
+    @Column(name = "field")
     private String field;
 
-    @Column(name = "cost", table = "projects")
-    @JsonProperty("cost")
+    @Column(name = "cost")
     private Long cost;
 
-    @Column(name = "create_date", table = "projects")
-    @JsonProperty("creation_date")
+    @Column(name = "create_date")
     private String createDate;
 
 }

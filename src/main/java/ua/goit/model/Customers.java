@@ -22,20 +22,16 @@ public class Customers implements BaseEntity<Long>, Serializable {
     private static final long serialVersionUID = 5612028522264576789L;
 
     @Id
-    @Column(name = "id", table = "customers")
-    @JsonProperty("id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", table = "customers")
-    @JsonProperty("name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "city", table = "customers")
-    @JsonProperty("city")
+    @Column(name = "city")
     private String city;
 
-    @Column(name = "industry", table = "customers")
-    @JsonProperty("industry")
+    @Column(name = "industry")
     private String industry;
 
 }

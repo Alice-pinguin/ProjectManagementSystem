@@ -22,24 +22,20 @@ public class Developers implements BaseEntity<Long>, Serializable {
     private static final long serialVersionUID = -8414974451787675055L;
 
     @Id
-    @Column(name = "id_developer", table = "developers")
-    @JsonProperty("id")
+    @Column(name = "id_developer")
     private Long id;
 
-    @Column(name = "name", table = "developers")
-    @JsonProperty("name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "age", table = "developers")
-    @JsonProperty("age")
+    @Column(name = "age")
     private Integer age;
 
-    @Column(name = "gender", table = "developers")
-    @JsonProperty("gender")
+    @Column(name = "gender")
+
     private String gender;
 
-    @Column(name = "id_salary", table = "developers")
-    @JsonProperty("salary")
+    @Column(name = "id_salary")
     private Long salary;
 
 }

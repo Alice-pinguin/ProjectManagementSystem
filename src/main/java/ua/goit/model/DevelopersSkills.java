@@ -22,12 +22,10 @@ public class DevelopersSkills implements BaseEntity<Long>, Serializable {
     private static final long serialVersionUID = 4613032931473118565L;
 
     @Id
-    @Column(name = "id_developer", table = "developers_skills")
-    @JsonProperty("id_developer")
+    @Column(name = "id_developer")
     private Long developerId;
 
-    @Column(name = "id_skill", table = "developers_skills")
-    @JsonProperty("id_skill")
+    @Column(name = "id_skill")
     private Long skillId;
 
 

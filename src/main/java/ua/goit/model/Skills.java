@@ -21,16 +21,13 @@ public class Skills implements BaseEntity<Long>, Serializable {
     private static final long serialVersionUID = -8495286847326134262L;
 
     @Id
-    @Column(name = "id_skill", table = "skills")
-    @JsonProperty("id")
+    @Column(name = "id_skill")
     private Long id;
 
-    @Column(name = "language", table = "skills")
-    @JsonProperty("language")
+    @Column(name = "language")
     private String language;
 
-    @Column(name = "level", table = "skills")
-    @JsonProperty("level")
+    @Column(name = "level")
     private String level;
 
 }
