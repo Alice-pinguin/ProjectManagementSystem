@@ -58,7 +58,7 @@ public abstract class SQLConnection<E extends BaseEntity<ID>, ID> implements Clo
     @SneakyThrows
     @Override
     public E update(E e) {
-        return null;
+        return e;
     }
 
     @SneakyThrows
@@ -71,22 +71,28 @@ public abstract class SQLConnection<E extends BaseEntity<ID>, ID> implements Clo
     @SneakyThrows
     @Override
     public List<E> findAll(){
-        ResultSet executeQuery = findAllPS.executeQuery();
-        final List<E> result = new ArrayList<>();
-        while (executeQuery.next()) {
-            Map<String, Object> objectMap = new HashMap<>();
-            for (String column : columns) {
-                objectMap.put(column, executeQuery.getObject(column));
-            }
-            result.add(objectMapper.convertValue(objectMap, entityClass));
-        }
-        return result;
+        return convertTo(findAllPS.executeQuery());
     }
 
     @SneakyThrows
     @Override
     public Optional<E> findById(ID id){
-        return findAll().stream().findAny();
+        findBiIdPS.setObject(1, id);
+        List<E> byId = convertTo(findBiIdPS.executeQuery());
+        return  Optional.of(byId.get(0));
+    }
+
+    @SneakyThrows
+    public List<E> convertTo(ResultSet resultSet) {
+        final List<E> all = new ArrayList<>();
+        while (resultSet.next()) {
+            Map<String, Object> objectMap = new HashMap<>();
+            for (String column : columns) {
+                objectMap.put(column, resultSet.getObject(column));
+            }
+            all.add(objectMapper.convertValue(objectMap, entityClass));
+        }
+        return all;
     }
 
     @SneakyThrows
