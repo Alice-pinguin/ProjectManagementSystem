@@ -6,18 +6,18 @@ import java.util.Optional;
 
 public interface CrudRepository<E extends BaseEntity<ID>, ID> {
 
-    //E save(E e); todo (instead of create and update)
+    E save(E e);  //(instead of create and update)
 
-    E create (E e);
-
-    E update (E e);
-
-    //List<E> saveAll(Iterable<E> itrb);
+    List<E> saveAll(Iterable<E> itrb);
 
     void deleteById(ID id);
 
     Optional<E> findById(ID id);
 
     List<E> findAll();
+
+    //E create (E e);
+
+    //  E update (E e);
 
 }
