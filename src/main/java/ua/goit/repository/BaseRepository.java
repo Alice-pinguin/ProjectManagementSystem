@@ -1,22 +1,23 @@
 package ua.goit.repository;
 
 import ua.goit.model.BaseEntity;
-import ua.goit.model.Companies;
-
-
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
+public interface BaseRepository<E extends BaseEntity<ID>, ID> {
 
-public interface BaseRepository<ID,E extends BaseEntity<ID>> {
+    //E save(E e); todo (instead of create and update)
 
-    E create (E e) throws SQLException;
+    E create (E e);
 
-    E update(ID id,E e) throws SQLException;
+    E update (E e);
 
-    void delete(ID id) throws SQLException;
+    //List<E> saveAll(Iterable<E> itrb);
 
-    E findByID(ID id) throws SQLException;
+    void deleteById(ID id);
 
-    List<E> findAll() throws SQLException;
+    Optional<E> findById(ID id);
+
+    List<E> findAll();
+
 }

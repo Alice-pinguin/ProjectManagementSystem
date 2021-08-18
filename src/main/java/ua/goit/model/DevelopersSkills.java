@@ -30,6 +30,7 @@ public class DevelopersSkills implements BaseEntity<Long>, Serializable {
     @JsonProperty("id_skill")
     private Long skillId;
 
+
     @Override
     public Long getId() {
         return developerId;
