@@ -4,5 +4,4 @@ import ua.goit.model.Skills;
 
 public class SkillsServiceImpl extends BaseService<Skills, Long> {
 
-
 }
