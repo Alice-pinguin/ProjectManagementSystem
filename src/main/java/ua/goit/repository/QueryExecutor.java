@@ -2,20 +2,19 @@ package ua.goit.repository;
 
 import ua.goit.model.BaseEntity;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface QueryExecutor<E extends BaseEntity<ID>, ID> {
 
-    Long getTotalSalaryDevelopersByProject(Long id) throws SQLException;
+    Long getTotalSalaryDevelopersByProject(Long id);
 
-    List<E> getListOfDevelopersFromProject(Long id) throws SQLException;
+    List<E> getListOfDevelopersFromProject(Long id);
 
-    List<E> getDevelopersBySkill(String skill) throws SQLException;
+    List<E> getDevelopersBySkill(String skill);
 
-    List<E> getDeveloperByLevel(String level) throws SQLException;
+    List<E> getDeveloperByLevel(String level);
 
-    List<E> projectWithCountDevAndDate(Long id) throws SQLException;
+    List<E> projectWithCountDevAndDate();
 
 }
 

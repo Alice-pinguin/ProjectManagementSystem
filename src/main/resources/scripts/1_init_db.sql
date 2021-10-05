@@ -1,68 +1,68 @@
-DROP DATABASE IF EXISTS homework;
-CREATE DATABASE IF NOT EXISTS homework;
-use homework;
+DROP DATABASE IF EXISTS jdbs;
+CREATE DATABASE IF NOT EXISTS jdbc;
+use jdbc;
 
 CREATE TABLE developers (
-                            id_developer int NOT NULL AUTO_INCREMENT,
+                            id int NOT NULL AUTO_INCREMENT,
                             name varchar(55) NOT NULL,
-                            age int(2),
+                            age int(3),
                             gender varchar(10),
                             salary long not null,
-                            PRIMARY KEY (id_developer));
+                            PRIMARY KEY (id));
 
 CREATE TABLE skills (
-                        id_skill int NOT NULL AUTO_INCREMENT,
+                        id int NOT NULL AUTO_INCREMENT,
                         language varchar(10),
                         level varchar(10),
-                        PRIMARY KEY (id_skill));
+                        PRIMARY KEY (id));
 
 CREATE TABLE projects (
-                          id_project int NOT NULL AUTO_INCREMENT,
+                          id int NOT NULL AUTO_INCREMENT,
                           name varchar(100) NOT NULL,
                           field varchar(20) NOT NULL,
                           cost  long NOT NULL,
                           create_date date not null,
-                          PRIMARY KEY (id_project));
+                          PRIMARY KEY (id));
 
 CREATE TABLE companies (
-                           id_company int NOT NULL AUTO_INCREMENT,
+                           id int NOT NULL AUTO_INCREMENT,
                            name varchar(20) NOT NULL,
                            city varchar(20) NOT NULL,
-                           PRIMARY KEY (id_company));
+                           PRIMARY KEY (id));
 
 CREATE TABLE customers (
-                           id_customer int NOT NULL AUTO_INCREMENT,
+                           id int NOT NULL AUTO_INCREMENT,
                            name varchar(25) NOT NULL,
                            city varchar(20) NOT NULL,
                            industry varchar (20) NOT NULL,
-                           PRIMARY KEY (id_customer));
+                           PRIMARY KEY (id));
 
 CREATE TABLE developers_skills (
                                    id_developer int NOT NULL,
                                    id_skill int NOT NULL,
                                    PRIMARY KEY (id_developer, id_skill),
-                                   FOREIGN KEY (id_developer) REFERENCES developers (id_developer),
-                                   FOREIGN KEY (id_skill) REFERENCES skills (id_skill));
+                                   FOREIGN KEY (id_developer) REFERENCES developers (id),
+                                   FOREIGN KEY (id_skill) REFERENCES skills (id));
 
 CREATE TABLE developers_projects (
                                      id_developer int NOT NULL,
                                      id_project int NOT NULL,
                                      PRIMARY KEY (id_developer, id_project),
-                                     FOREIGN KEY (id_developer) REFERENCES developers (id_developer),
-                                     FOREIGN KEY (id_project) REFERENCES projects (id_project));
+                                     FOREIGN KEY (id_developer) REFERENCES developers (id),
+                                     FOREIGN KEY (id_project) REFERENCES projects (id));
 
 CREATE TABLE companies_projects (
                                     id_company int NOT NULL,
                                     id_project int NOT NULL,
                                     PRIMARY KEY (id_company, id_project),
                                     KEY id_project (id_project),
-                                    FOREIGN KEY (id_company) REFERENCES companies (id_company),
-                                    FOREIGN KEY (id_project) REFERENCES projects (id_project));
+                                    FOREIGN KEY (id_company) REFERENCES companies (id),
+                                    FOREIGN KEY (id_project) REFERENCES projects (id));
 
 CREATE TABLE customers_projects (
                                     id_customer int NOT NULL,
                                     id_project int NOT NULL,
                                     PRIMARY KEY (id_customer, id_project),
                                     KEY id_project (id_project),
-                                    FOREIGN KEY (id_customer) REFERENCES customers (id_customer),
-                                    FOREIGN KEY (id_project) REFERENCES projects (id_project));
+                                    FOREIGN KEY (id_customer) REFERENCES customers (id),
+                                    FOREIGN KEY (id_project) REFERENCES projects (id));

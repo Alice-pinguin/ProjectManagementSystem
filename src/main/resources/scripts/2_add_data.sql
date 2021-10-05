@@ -1,4 +1,4 @@
-use homework;
+use jdbc;
 INSERT INTO developers VALUES
 (1, 'Zina Ivanovich', 26, 'women', 5600),
 (2, 'Vasya Pupkin', 32, 'men', 1000),
