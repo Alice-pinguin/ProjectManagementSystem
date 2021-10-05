@@ -12,7 +12,7 @@ public class FindAllDevelopers implements Command {
 
     public FindAllDevelopers(View view, CrudRepository<Developer, Long> developerRepository) {
         this.view = view;
-        developerRepository = RepositoryFactory.of (Developer.class);
+        this.developerRepository = RepositoryFactory.of (Developer.class);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class FindAllDevelopers implements Command {
 
     @Override
     public void process() {
-        developerRepository.findAll ();
+        System.out.println (developerRepository.findAll ());
 
     }
 }
