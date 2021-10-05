@@ -64,19 +64,19 @@ public class ConsoleController {
         view.write ("Welcome to database JDBC application");
         while (true) {
             view.write ("\nPlease, enter the command from list or 'Exit'  to exit application\n");
-            commands.forEach (x -> view.write (x.commandName ()));
-            String input = view.read ();
-            if (input.equalsIgnoreCase ("Q"))
+            commands.forEach (c -> view.write (c.commandName ()));
+            String command = view.read ();
+            if (command.equalsIgnoreCase ("Exit")) {
                 break;
-            doCommand (input);
+            }
+            doCommand (command);
         }
     }
 
-    private void doCommand(String input) {
-
-        for (Command command : commands)
-            if (command.canProcess (input)) {
-                command.process ();
+    private void doCommand(String command) {
+        for (Command comma : commands)
+            if (comma.canProcess (command)) {
+                comma.process ();
                 break;
             }
 

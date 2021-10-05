@@ -9,4 +9,5 @@ public interface Command {
     default boolean canProcess(String command) {
         return this.commandName().equals(command);
     }
+
 }
