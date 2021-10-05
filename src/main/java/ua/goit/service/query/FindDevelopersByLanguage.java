@@ -23,6 +23,6 @@ public class FindDevelopersByLanguage implements Command {
     public void process() {
             view.write("Choose languade");
             String skill  = view.read();
-            queryExecutor.getDevelopersBySkill (skill).forEach(System.out::println);
+        System.out.println (queryExecutor.getDevelopersBySkill (skill));
     }
 }

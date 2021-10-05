@@ -31,7 +31,7 @@ public class DeleteDeveloper implements Command {
         Optional<Developer> developer = developerRepository.findById (id);
 
         if (developer.isEmpty ())
-            throw new IllegalArgumentException(String.format("Developer with id %d not exist"));
+            throw new IllegalArgumentException("Developer with id %d not exist");
 
         developerRepository.deleteById (id);
         view.write("Developer deleted");

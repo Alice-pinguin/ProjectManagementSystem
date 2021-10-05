@@ -23,9 +23,11 @@ public class QueryExecutorImpl implements QueryExecutor{
 
     @Override
     public Long getTotalSalaryDevelopersByProject(Long id) {
-        return developerList.stream()
+        List <Developer> project = getListOfDevelopersFromProject (id);
+        Long salary = project.stream ()
                 .mapToLong (Developer::getSalary)
                 .sum();
+        return salary;
     }
     @Override
     public  List getListOfDevelopersFromProject(Long id) {
@@ -86,6 +88,7 @@ public class QueryExecutorImpl implements QueryExecutor{
 
     @Override
     public List projectWithCountDevAndDate() {
+
         return projectRepository.findAll ().stream ()
                 .map(p -> p.getCreateDate ().toString() + " - " + p.getName()+ " "+
                         developerList.size ())

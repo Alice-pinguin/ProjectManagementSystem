@@ -29,9 +29,10 @@ public class FindByIdDeveloper implements Command {
         view.write("Enter a developer id");
         Long id = Long.valueOf (view.read());
         Optional<Developer> developer = developerRepository.findById (id);
-        view.write (developer.toString ());
+        if (developer.isEmpty ()) {
+            throw new IllegalArgumentException ("Developer with id %d not exist");
+        }
+        System.out.println (developer.get ());
 
-        if (developer.isEmpty ())
-            throw new IllegalArgumentException(String.format("Developer with id %d not exist"));
     }
 }

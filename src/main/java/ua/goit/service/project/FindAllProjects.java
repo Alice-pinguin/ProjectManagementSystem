@@ -22,7 +22,6 @@ public class FindAllProjects implements Command {
 
     @Override
     public void process() {
-
-        projectRepository.findAll ();
+        System.out.println (projectRepository.findAll ());
     }
 }

@@ -24,6 +24,6 @@ public class FindAllCompany implements Command {
     @Override
     public void process() {
 
-        companyRepository.findAll ();
+        System.out.println(companyRepository.findAll ());
     }
 }

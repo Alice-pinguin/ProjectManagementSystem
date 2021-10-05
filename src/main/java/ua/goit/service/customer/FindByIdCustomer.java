@@ -28,9 +28,9 @@ public class FindByIdCustomer implements Command {
         view.write ("Enter a customer id");
         Long id = Long.valueOf (view.read ());
         Optional<Customer> customer = customerRepository.findById (id);
-        view.write (customer.toString ());
         if (customer.isEmpty ()) {
             throw new IllegalArgumentException ("Customer with id %d not exist");
         }
+        System.out.println (customer.get ());
     }
 }

@@ -20,9 +20,9 @@ public class FindAllDevelopersByProject implements Command {
 
     @Override
     public void process() {
-        view.write("Enter project ID languade");
+        view.write("Enter project ID");
         Long id  = Long.valueOf (view.read());
-        queryExecutor.getListOfDevelopersFromProject (id);
+        System.out.println (queryExecutor.getListOfDevelopersFromProject (id));
     }
 }
 

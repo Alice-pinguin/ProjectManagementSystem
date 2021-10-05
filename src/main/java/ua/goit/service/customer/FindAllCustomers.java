@@ -23,7 +23,6 @@ public class FindAllCustomers implements Command {
 
     @Override
     public void process() {
-        customerRepository.findAll ();
-
+        System.out.println (customerRepository.findAll ());
     }
 }

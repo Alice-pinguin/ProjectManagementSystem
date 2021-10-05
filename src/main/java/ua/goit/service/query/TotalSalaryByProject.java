@@ -23,7 +23,7 @@ public class TotalSalaryByProject implements Command {
     public void process() {
         view.write("Enter project ID");
         Long id  = Long.valueOf (view.read());
-        queryExecutor.getTotalSalaryDevelopersByProject (id);
+        System.out.println (queryExecutor.getTotalSalaryDevelopersByProject (id));
 
     }
 }

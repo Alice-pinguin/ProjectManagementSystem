@@ -27,9 +27,9 @@ public class FindByIdProject implements Command {
         view.write("Enter a project id");
         Long id = Long.valueOf (view.read());
         Optional<Project> project = projectRepository.findById (id);
-        if (project.isEmpty ())
-            throw new IllegalArgumentException("Project with id %d not exist");
-
-        view.write(project.toString());
+        if (project.isEmpty ()) {
+            throw new IllegalArgumentException ("Project with id %d not exist");
+        }
+        System.out.println (project.get ());
     }
 }

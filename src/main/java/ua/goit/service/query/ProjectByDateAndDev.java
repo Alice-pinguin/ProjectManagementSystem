@@ -21,6 +21,6 @@ public class ProjectByDateAndDev implements Command {
 
     @Override
     public void process() {
-        queryExecutor.projectWithCountDevAndDate ();
+        System.out.println (queryExecutor.projectWithCountDevAndDate ());
     }
 }

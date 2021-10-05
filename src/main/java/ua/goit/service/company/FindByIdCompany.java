@@ -29,10 +29,10 @@ public class FindByIdCompany implements Command {
         view.write ("Enter a company id");
         Long id = Long.valueOf (view.read ());
         Optional<Company> company = companyRepository.findById (id);
-        view.write (company.toString ()
-        );
         if (company.isEmpty ()) {
-            throw new IllegalArgumentException (String.format ("Company with id %d not exist"));
+            throw new IllegalArgumentException ("Company with id %d not exist");
+        }
+        System.out.println (company.get ());
+
         }
     }
-}

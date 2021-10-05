@@ -23,6 +23,6 @@ public class FindDevelopersByLevel implements Command {
     public void process() {
         view.write("Choose level");
         String level  = view.read();
-        queryExecutor.getDeveloperByLevel (level);
+        System.out.println (queryExecutor.getDeveloperByLevel (level));
     }
 }
