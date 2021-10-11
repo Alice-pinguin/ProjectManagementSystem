@@ -1,28 +1,32 @@
 package ua.goit.service.query;
 
 import ua.goit.repository.QueryExecutorImpl;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.QueryCommand;
 import ua.goit.view.View;
 
-public class FindAllDevelopersByProject implements Command {
-    private final View view;
-    private QueryExecutorImpl queryExecutor;
+import java.util.Map;
 
-    public FindAllDevelopersByProject(View view, QueryExecutorImpl queryExecutor) {
-        this.view = view;
-        this.queryExecutor = new QueryExecutorImpl ();
+public class FindAllDevelopersByProject extends QueryCommand {
+
+
+    public FindAllDevelopersByProject(View view, Map<String, Command> commands, QueryExecutorImpl queryExecutor) {
+        super (view, commands, queryExecutor);
     }
 
     @Override
     public String commandName() {
-        return "Find all developers by project ID";
+        return "Find all developers by project";
+    }
+
+    @Override
+    public String description() {
+        return "find developers on project";
     }
 
     @Override
     public void process() {
-        view.write("Enter project ID");
-        Long id  = Long.valueOf (view.read());
-        System.out.println (queryExecutor.getListOfDevelopersFromProject (id));
+        super.getListOfDevelopersFromProject ();
     }
 }
 

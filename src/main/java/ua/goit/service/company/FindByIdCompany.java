@@ -3,19 +3,17 @@ package ua.goit.service.company;
 import ua.goit.model.Company;
 import ua.goit.repository.CrudRepository;
 import ua.goit.repository.RepositoryFactory;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.CrudCommand;
 import ua.goit.view.View;
 
+import java.util.Map;
 import java.util.Optional;
 
-public class FindByIdCompany implements Command {
+public class FindByIdCompany extends CrudCommand {
 
-    private final View view;
-    private CrudRepository<Company, Long> companyRepository;
-
-    public FindByIdCompany(View view, CrudRepository<Company, Long> companyRepository) {
-        this.view = view;
-        companyRepository = RepositoryFactory.of (Company.class);
+    public FindByIdCompany(View view, Map<String, Command> commands) {
+        super (view, commands, Company.class);
     }
 
     @Override
@@ -24,15 +22,12 @@ public class FindByIdCompany implements Command {
     }
 
     @Override
+    public String description() {
+        return "find a company by ID";
+    }
+
+    @Override
     public void process() {
-
-        view.write ("Enter a company id");
-        Long id = Long.valueOf (view.read ());
-        Optional<Company> company = companyRepository.findById (id);
-        if (company.isEmpty ()) {
-            throw new IllegalArgumentException ("Company with id %d not exist");
-        }
-        System.out.println (company.get ());
-
+        super.findById ();
         }
     }

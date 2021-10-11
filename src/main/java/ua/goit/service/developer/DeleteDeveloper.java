@@ -1,39 +1,32 @@
 package ua.goit.service.developer;
 
 import ua.goit.model.Developer;
-import ua.goit.repository.CrudRepository;
-import ua.goit.repository.RepositoryFactory;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.CrudCommand;
+
 import ua.goit.view.View;
 
-import java.util.Optional;
+import java.util.Map;
 
-public class DeleteDeveloper implements Command {
 
-    private final View view;
-    private CrudRepository<Developer, Long> developerRepository;
+public class DeleteDeveloper extends CrudCommand {
 
-    public DeleteDeveloper(View view, CrudRepository<Developer, Long> developerRepository) {
-        this.view = view;
-        developerRepository = RepositoryFactory.of (Developer.class);
+    public DeleteDeveloper(View view, Map<String, Command> commands) {
+        super (view, commands, Developer.class);
+    }
+
+    @Override
+    public void process() {
+        super.deleteById ();
     }
 
     @Override
     public String commandName() {
         return "Delete developer";
-    }
+}
 
     @Override
-    public void process() {
-
-        view.write("Enter a developer id");
-        Long id = Long.valueOf (view.read());
-        Optional<Developer> developer = developerRepository.findById (id);
-
-        if (developer.isEmpty ())
-            throw new IllegalArgumentException("Developer with id %d not exist");
-
-        developerRepository.deleteById (id);
-        view.write("Developer deleted");
+    public String description() {
+        return "delete developer by ID";
     }
 }

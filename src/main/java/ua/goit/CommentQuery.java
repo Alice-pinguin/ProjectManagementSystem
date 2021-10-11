@@ -1,6 +1,11 @@
 package ua.goit;
 
-import ua.goit.model.*;
+
+import ua.goit.model.Company;
+import ua.goit.model.Developer;
+import ua.goit.model.Project;
+import ua.goit.model.Skill;
+import ua.goit.model.Customer;
 import ua.goit.repository.CrudRepository;
 import ua.goit.repository.RepositoryFactory;
 
@@ -11,8 +16,6 @@ public class CommentQuery {
         CrudRepository<Company, Long> companyRepository = RepositoryFactory.of (Company.class);
         CrudRepository<Project, Long> projectRepository = RepositoryFactory.of (Project.class);
         CrudRepository<Skill, Long> skillRepository = RepositoryFactory.of (Skill.class);
-        CrudRepository<DeveloperProject, Long> developerProjectRepository = RepositoryFactory.of (DeveloperProject.class);
-        CrudRepository<DeveloperSkill, Long> developerSkillRepository = RepositoryFactory.of (DeveloperSkill.class);
         CrudRepository<Customer, Long> customerRepository = RepositoryFactory.of (Customer.class);
 
 //        Company company = Company.builder ()

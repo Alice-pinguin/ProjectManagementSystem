@@ -1,103 +1,101 @@
 package ua.goit.repository;
 
 
-import ua.goit.model.*;
-
+import lombok.SneakyThrows;
+import ua.goit.controller.DataBaseConnection;
+import ua.goit.model.Developer;
+import ua.goit.model.Project;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class QueryExecutorImpl implements QueryExecutor{
 
-    CrudRepository<Developer, Long> developerRepository = RepositoryFactory.of (Developer.class);
-    CrudRepository<Company, Long> companyRepository = RepositoryFactory.of (Company.class);
-    CrudRepository<Project, Long> projectRepository = RepositoryFactory.of (Project.class);
-    CrudRepository<Skill,Long> skillRepository = RepositoryFactory.of (Skill.class);
-    CrudRepository<DeveloperProject, Long> developerProjectRepository = RepositoryFactory.of (DeveloperProject.class);
-    CrudRepository<DeveloperSkill, Long> developerSkillRepository = RepositoryFactory.of (DeveloperSkill.class);
+  private  CrudRepository<Project, Long> projectRepository = RepositoryFactory.of(Project.class);
+  private  List<Developer> developerList = new ArrayList<> ();
+  private final Connection connection = DataBaseConnection.getInstance ().getConnection ();
+  private final Statement statement;
+    {
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+           throw new RuntimeException ();
+        }
+    }
 
-    List<Developer> developerList = new ArrayList<> ();
-    List<Developer> developerLevel = new ArrayList<> ();
-    List<Developer> developerLanguage = new ArrayList<> ();
-
+    @SneakyThrows
     @Override
-    public Long getTotalSalaryDevelopersByProject(Long id) {
-        List <Developer> project = getListOfDevelopersFromProject (id);
-        Long salary = project.stream ()
-                .mapToLong (Developer::getSalary)
-                .sum();
+    public List getTotalSalaryDevelopersByProject(Long id) {
+        List salary = new ArrayList<> ();
+        String query = "SELECT SUM(developers.salary) AS sumSalaries FROM jdbc.developers_projects " +
+                "inner join jdbc.developers on jdbc.developers_projects.id_developer = developers.id " +
+                "inner join jdbc.projects on jdbc.developers_projects.id_project ='" + id + "'" +
+                "GROUP BY projects.id  limit 1";
+        ResultSet resultSet = statement.executeQuery (query);
+        while (resultSet.next ())
+            salary.add (resultSet.getString ("sumSalaries"));
         return salary;
     }
-    @Override
-    public  List getListOfDevelopersFromProject(Long id) {
-        List<Long> resultId = developerProjectRepository.findAll ().stream ()
-                .filter (e -> e.getProjectId ().equals (id))
-                .map (DeveloperProject::getDelevoperId)
-                .collect (Collectors.toList ());
 
-        for (Long i : resultId) {
-            Optional<Developer> byId = developerRepository.findById (i);
-            developerList.add (byId.get ());
+    @SneakyThrows
+    @Override
+    public List<Developer> getListOfDevelopersFromProject(Long id)  {
+        String query = "SELECT * FROM jdbc.developers d, jdbc.projects p, jdbc.developers_projects dp" +
+                " where  d.id=dp.id_developer and p.id = dp.id_project and p.id ='" +id +"'";
+        return getDevelopers (query, developerList);
+    }
+
+    @SneakyThrows
+    @Override
+    public List<Developer> getDevelopersBySkill(String skill){
+        String query = "SELECT d.id, d.name,d.age, d.gender, d.salary FROM jdbc.developers d " +
+                "INNER JOIN jdbc.developers_skills ds ON d.id = ds.id_developer " +
+                "INNER JOIN jdbc.skills s ON ds.id_skill = s.id" +
+                " WHERE s.language ='"+skill+"'";
+        return getDevelopers (query, developerList);
+    }
+
+    @SneakyThrows
+    @Override
+    public List<Developer> getDeveloperByLevel (String level) {
+        String query = "SELECT d.id, d.name,d.age, d.gender, d.salary FROM jdbc.developers d " +
+                "INNER JOIN jdbc.developers_skills ds ON d.id = ds.id_developer " +
+                "INNER JOIN jdbc.skills s ON ds.id_skill = s.id" +
+                " WHERE s.level ='"+level+"'";
+        return getDevelopers (query, developerList);
+    }
+
+    @SneakyThrows
+    private List<Developer> getDevelopers(String query, List<Developer> developerList) {
+        ResultSet resultSet = statement.executeQuery (query);
+        while (resultSet.next ()){
+            Developer developer = Developer.builder ()
+                    .id(resultSet.getLong("id"))
+                    .name(resultSet.getString("name"))
+                    .age(resultSet.getInt("age"))
+                    .gender(resultSet.getString("gender"))
+                    .salary(resultSet.getLong("salary"))
+                    .build();
+            developerList.add (developer);
+
         }
+
         return developerList;
     }
-    @Override
-    public List getDevelopersBySkill(String skill) {
-        List<Long> resultSkill = skillRepository.findAll ().stream ()
-                .filter (s -> s.getLanguage ().equals (skill))
-                .map (Skill::getId)
-                .collect (Collectors.toList ());
-
-        for (Long id : resultSkill) {
-            List<Long> result = developerSkillRepository.findAll ().stream ()
-                    .filter (s -> s.getSkillId ().equals (id))
-                    .map (DeveloperSkill::getDeveloperId)
-                    .collect (Collectors.toList ());
-
-            for (Long i : result) {
-                Optional<Developer> byId = developerRepository.findById (i);
-                developerLanguage.add (byId.get ());
-            }
-        }
-            return developerLanguage;
-
-    }
 
     @Override
-    public List getDeveloperByLevel(String level) {
-        List<Long> resultLevel = skillRepository.findAll ().stream ()
-                .filter (s -> s.getLevel ().equals (level))
-                .map (Skill::getId)
-                .collect (Collectors.toList ());
-
-        for (Long id : resultLevel) {
-            List<Long> result = developerSkillRepository.findAll ().stream ()
-                    .filter (s -> s.getSkillId ().equals (id))
-                    .map (DeveloperSkill::getDeveloperId)
-                    .collect (Collectors.toList ());
-
-            for (Long i : result) {
-                Optional<Developer> byId = developerRepository.findById (i);
-                developerLevel.add (byId.get ());
-            }
-        }
-        return developerLevel;
-
-    }
-
-    @Override
-    public List projectWithCountDevAndDate() {
-
-        return projectRepository.findAll ().stream ()
-                .map(p -> p.getCreateDate ().toString() + " - " + p.getName()+ " "+
-                        developerList.size ())
+    public List projectWithCountDevAndDate()  {
+        return projectRepository.findAll().stream()
+                .map(p -> p.getCreateDate ().toString() + " - " + p.getName() + " - " + getListOfDevelopersFromProject (p.getId ()).size() + ".")
                 .collect(Collectors.toList());
-
-
     }
 
 }
+
 
 
 

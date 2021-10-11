@@ -1,26 +1,31 @@
 package ua.goit.service.query;
 
 import ua.goit.repository.QueryExecutorImpl;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.QueryCommand;
 import ua.goit.view.View;
 
-public class ProjectByDateAndDev implements Command {
+import java.util.Map;
 
-    private final View view;
-    private QueryExecutorImpl queryExecutor;
+public class ProjectByDateAndDev extends QueryCommand {
 
-    public ProjectByDateAndDev(View view, QueryExecutorImpl queryExecutor) {
-        this.view = view;
-        this.queryExecutor = new QueryExecutorImpl ();
+
+    public ProjectByDateAndDev(View view, Map<String, Command> commands, QueryExecutorImpl queryExecutor) {
+        super (view, commands, queryExecutor);
     }
 
     @Override
     public String commandName() {
-        return "Project with date and developers";
+        return "Project by date and dev";
+    }
+
+    @Override
+    public String description() {
+        return "show sorted project by date with count dev";
     }
 
     @Override
     public void process() {
-        System.out.println (queryExecutor.projectWithCountDevAndDate ());
+        super.getProjectWithCountDevAndDate ();
     }
 }

@@ -1,6 +1,7 @@
-package ua.goit.utils;
+package ua.goit.controller;
 
 import lombok.SneakyThrows;
+import ua.goit.utils.PropertiesLoader;
 
 import java.io.Closeable;
 import java.sql.Connection;

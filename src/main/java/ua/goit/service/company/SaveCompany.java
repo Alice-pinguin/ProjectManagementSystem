@@ -1,5 +1,6 @@
 package ua.goit.service.company;
 
+
 import ua.goit.model.Company;
 import ua.goit.service.commands.Command;
 import ua.goit.service.commands.CrudCommand;
@@ -7,24 +8,28 @@ import ua.goit.view.View;
 
 import java.util.Map;
 
-public class FindAllCompany extends CrudCommand {
+public class SaveCompany extends CrudCommand {
 
-    public FindAllCompany(View view, Map<String, Command> commands) {
+    public SaveCompany(View view, Map<String, Command> commands) {
         super (view, commands, Company.class);
     }
 
-    @Override
+        @Override
     public String commandName() {
-        return "Find all companies";
+        return "Save company";
     }
 
     @Override
     public String description() {
-        return "find all data about companies";
+        return "for saving a new company, please enter the name and the city of a company";
     }
 
     @Override
     public void process() {
-        super.findAll ();
+        Company company = Company.builder()
+                .name(view.read())
+                .city(view.read())
+                .build();
+
     }
 }

@@ -1,17 +1,17 @@
 package ua.goit.service.query;
 
 import ua.goit.repository.QueryExecutorImpl;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.QueryCommand;
 import ua.goit.view.View;
 
-public class FindDevelopersByLevel implements Command {
+import java.util.Map;
 
-    private final View view;
-    private QueryExecutorImpl queryExecutor;
+public class FindDevelopersByLevel extends QueryCommand {
 
-    public FindDevelopersByLevel(View view, QueryExecutorImpl queryExecutor) {
-        this.view = view;
-        this.queryExecutor = new QueryExecutorImpl ();
+
+    public FindDevelopersByLevel(View view, Map<String, Command> commands, QueryExecutorImpl queryExecutor) {
+        super (view, commands, queryExecutor);
     }
 
     @Override
@@ -20,9 +20,12 @@ public class FindDevelopersByLevel implements Command {
     }
 
     @Override
+    public String description() {
+        return "find developers by level";
+    }
+
+    @Override
     public void process() {
-        view.write("Choose level");
-        String level  = view.read();
-        System.out.println (queryExecutor.getDeveloperByLevel (level));
+        super.getDevelopersByLevel ();
     }
 }

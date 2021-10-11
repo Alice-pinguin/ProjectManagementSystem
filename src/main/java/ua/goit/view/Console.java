@@ -1,17 +1,24 @@
 package ua.goit.view;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
+
 
 public class Console implements View {
+
+    private final Scanner scanner;
+
+    public Console() {
+        scanner = new Scanner(System.in);
+    }
+
     @Override
     public String read() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        return scanner.nextLine().trim().toLowerCase();
     }
 
     @Override
-    public void write(String message) {
-        System.out.println(message);
+    public void write(Object ... objects) {
+        Stream.of(objects).forEach(System.out::println);
     }
 }
-

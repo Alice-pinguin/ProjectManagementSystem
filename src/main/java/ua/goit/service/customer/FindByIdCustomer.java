@@ -1,21 +1,17 @@
 package ua.goit.service.customer;
 
 import ua.goit.model.Customer;
-import ua.goit.repository.CrudRepository;
-import ua.goit.repository.RepositoryFactory;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.CrudCommand;
 import ua.goit.view.View;
 
-import java.util.Optional;
+import java.util.Map;
 
-public class FindByIdCustomer implements Command {
 
-    private  final View view;
-    private CrudRepository<Customer, Long> customerRepository;
+public class FindByIdCustomer extends CrudCommand {
 
-    public FindByIdCustomer(View view, CrudRepository<Customer, Long> customerRepository) {
-        this.view = view;
-        customerRepository = RepositoryFactory.of(Customer.class);
+    public FindByIdCustomer(View view, Map<String, Command> commands) {
+        super (view, commands, Customer.class);
     }
 
     @Override
@@ -24,13 +20,12 @@ public class FindByIdCustomer implements Command {
     }
 
     @Override
-    public void process() {
-        view.write ("Enter a customer id");
-        Long id = Long.valueOf (view.read ());
-        Optional<Customer> customer = customerRepository.findById (id);
-        if (customer.isEmpty ()) {
-            throw new IllegalArgumentException ("Customer with id %d not exist");
-        }
-        System.out.println (customer.get ());
+    public String description() {
+        return "find a customer by ID";
     }
-}
+
+    @Override
+    public void process() {
+        super.findById ();
+        }
+    }

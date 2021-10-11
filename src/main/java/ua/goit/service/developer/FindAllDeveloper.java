@@ -1,26 +1,26 @@
-package ua.goit.service.company;
+package ua.goit.service.developer;
 
-import ua.goit.model.Company;
+import ua.goit.model.Developer;
 import ua.goit.service.commands.Command;
 import ua.goit.service.commands.CrudCommand;
 import ua.goit.view.View;
 
 import java.util.Map;
 
-public class FindAllCompany extends CrudCommand {
+public class FindAllDeveloper extends CrudCommand {
 
-    public FindAllCompany(View view, Map<String, Command> commands) {
-        super (view, commands, Company.class);
+    public FindAllDeveloper(View view, Map<String, Command> commands) {
+        super (view, commands, Developer.class);
     }
 
     @Override
     public String commandName() {
-        return "Find all companies";
+        return "Find all developers";
     }
 
     @Override
     public String description() {
-        return "find all data about companies";
+        return "find all data about developers";
     }
 
     @Override

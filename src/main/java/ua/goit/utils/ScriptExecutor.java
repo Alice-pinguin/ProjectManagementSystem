@@ -1,6 +1,8 @@
 package ua.goit.utils;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Objects;
@@ -9,11 +11,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import lombok.SneakyThrows;
-
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
+import ua.goit.controller.DataBaseConnection;
 
 @Slf4j
 public class ScriptExecutor {
@@ -23,7 +25,7 @@ public class ScriptExecutor {
     @SneakyThrows
     public static void start() {
       log.info("Start of migration..." + PACKAGE_NAME);
-        Connection connection = ua.goit.utils.DataBaseConnection.getInstance().getConnection();
+        Connection connection = DataBaseConnection.getInstance().getConnection();
         List<String> resourceFiles = sortScript(getResourceFiles(PACKAGE_NAME));
 
         ScriptExecutor.log.info("List of scripts : ");
@@ -32,7 +34,7 @@ public class ScriptExecutor {
         ScriptRunner scriptRunner = new ScriptRunner(connection);
         for (String script : resourceFiles) {
             ScriptExecutor.log.info("Script execution : " + script);
-            try (Reader reader = new InputStreamReader(Objects.requireNonNull(ScriptExecutor.class
+            try (Reader reader = new InputStreamReader (Objects.requireNonNull(ScriptExecutor.class
                     .getClassLoader().getResourceAsStream(script)))) {
                 scriptRunner.runScript(reader);
             }

@@ -1,38 +1,32 @@
 package ua.goit.service.project;
 
 import ua.goit.model.Project;
-import ua.goit.repository.CrudRepository;
-import ua.goit.repository.RepositoryFactory;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.CrudCommand;
+
 import ua.goit.view.View;
 
-import java.util.Optional;
+import java.util.Map;
 
-public class DeleteProject implements Command {
 
-    private final View view;
-    private CrudRepository<Project, Long> projectRepository;
+public class DeleteProject extends CrudCommand {
 
-    public DeleteProject(View view, CrudRepository<Project, Long> projectRepository) {
-        this.view = view;
-        projectRepository = RepositoryFactory.of (Project.class);
+    public DeleteProject(View view, Map<String, Command> commands) {
+        super (view, commands, Project.class);
+    }
+
+    @Override
+    public void process() {
+        super.deleteById ();
     }
 
     @Override
     public String commandName() {
         return "Delete project";
-    }
+}
 
     @Override
-    public void process() {
-
-        view.write("Enter a project id");
-        Long id = Long.valueOf (view.read());
-        Optional<Project> project = projectRepository.findById (id);
-        if (project.isEmpty ())
-            throw new IllegalArgumentException("Project with id %d not exist");
-
-        projectRepository.deleteById (id);
-        view.write("Project deleted");
+    public String description() {
+        return "delete project by ID";
     }
 }

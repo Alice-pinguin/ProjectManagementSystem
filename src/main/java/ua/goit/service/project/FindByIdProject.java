@@ -1,20 +1,18 @@
 package ua.goit.service.project;
 
+
 import ua.goit.model.Project;
-import ua.goit.repository.CrudRepository;
-import ua.goit.repository.RepositoryFactory;
-import ua.goit.view.Command;
+
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.CrudCommand;
 import ua.goit.view.View;
+import java.util.Map;
 
-import java.util.Optional;
 
-public class FindByIdProject implements Command {
-    private final View view;
-    private CrudRepository<Project, Long> projectRepository;
+public class FindByIdProject extends CrudCommand {
 
-    public FindByIdProject(View view, CrudRepository<Project, Long> projectRepository) {
-        this.view = view;
-        projectRepository = RepositoryFactory.of (Project.class);
+    public FindByIdProject(View view, Map<String, Command> commands) {
+        super (view, commands, Project.class);
     }
 
     @Override
@@ -23,13 +21,12 @@ public class FindByIdProject implements Command {
     }
 
     @Override
-    public void process() {
-        view.write("Enter a project id");
-        Long id = Long.valueOf (view.read());
-        Optional<Project> project = projectRepository.findById (id);
-        if (project.isEmpty ()) {
-            throw new IllegalArgumentException ("Project with id %d not exist");
-        }
-        System.out.println (project.get ());
+    public String description() {
+        return "find a project by ID";
     }
-}
+
+    @Override
+    public void process() {
+        super.findById ();
+        }
+    }

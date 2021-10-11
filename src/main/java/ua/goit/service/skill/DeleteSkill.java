@@ -1,8 +1,7 @@
-package ua.goit.service.company;
+package ua.goit.service.skill;
 
 
-import ua.goit.model.Company;
-
+import ua.goit.model.Skill;
 import ua.goit.service.commands.Command;
 import ua.goit.service.commands.CrudCommand;
 
@@ -11,10 +10,10 @@ import ua.goit.view.View;
 import java.util.Map;
 
 
-public class DeleteCompany extends CrudCommand {
+public class DeleteSkill extends CrudCommand {
 
-    public DeleteCompany(View view, Map<String, Command> commands) {
-        super (view, commands, Company.class);
+    public DeleteSkill(View view, Map<String, Command> commands) {
+        super (view, commands, Skill.class);
     }
 
     @Override
@@ -24,11 +23,11 @@ public class DeleteCompany extends CrudCommand {
 
     @Override
     public String commandName() {
-        return "delete company";
+        return "Delete skill";
 }
 
     @Override
     public String description() {
-        return "delete company by ID";
+        return "delete skill by ID";
     }
 }

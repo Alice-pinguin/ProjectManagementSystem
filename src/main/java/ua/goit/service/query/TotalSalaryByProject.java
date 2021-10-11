@@ -1,29 +1,31 @@
 package ua.goit.service.query;
 
 import ua.goit.repository.QueryExecutorImpl;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.QueryCommand;
 import ua.goit.view.View;
 
-public class TotalSalaryByProject implements Command {
+import java.util.Map;
 
-    private final View view;
-    private QueryExecutorImpl queryExecutor;
+public class TotalSalaryByProject extends QueryCommand {
 
-    public TotalSalaryByProject(View view, QueryExecutorImpl queryExecutor) {
-        this.view = view;
-        this.queryExecutor = new QueryExecutorImpl ();
+    public TotalSalaryByProject(View view, Map<String, Command> commands, QueryExecutorImpl queryExecutor) {
+        super (view, commands, queryExecutor);
     }
 
     @Override
     public String commandName() {
-        return "Find total salary developers";
+        return "Show salary developers ";
+    }
+
+    @Override
+    public String description() {
+        return "show salary developers on project";
     }
 
     @Override
     public void process() {
-        view.write("Enter project ID");
-        Long id  = Long.valueOf (view.read());
-        System.out.println (queryExecutor.getTotalSalaryDevelopersByProject (id));
-
+        super.getTotalSalaryDevelopersByProject ();
     }
 }
+

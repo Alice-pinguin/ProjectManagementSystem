@@ -6,22 +6,18 @@ import ua.goit.controller.ConsoleController;
 import ua.goit.repository.QueryExecutor;
 import ua.goit.repository.QueryExecutorImpl;
 import ua.goit.utils.ScriptExecutor;
-
+import ua.goit.view.Console;
 
 
 public class Application {
 
    @SneakyThrows
     public static void main(String[] args)  {
-//      ScriptExecutor.start();
-//       ConsoleController consoleController = new ConsoleController ();
-//       consoleController.run ();
+      //ScriptExecutor.start();
+       ConsoleController consoleController = new ConsoleController (new Console ());
+     consoleController.process ();
 
-       QueryExecutor queryExecutor = new QueryExecutorImpl ();
 
-       System.out.println (queryExecutor.getListOfDevelopersFromProject (1L));
-
-       System.out.println (queryExecutor.getTotalSalaryDevelopersByProject (3L));
 
 
    }

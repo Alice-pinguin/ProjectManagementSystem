@@ -1,17 +1,17 @@
 package ua.goit.service.query;
 
 import ua.goit.repository.QueryExecutorImpl;
-import ua.goit.view.Command;
+import ua.goit.service.commands.Command;
+import ua.goit.service.commands.QueryCommand;
 import ua.goit.view.View;
 
-public class FindDevelopersByLanguage implements Command {
+import java.util.Map;
 
-    private final View view;
-    private QueryExecutorImpl queryExecutor;
+public class FindDevelopersByLanguage extends QueryCommand {
 
-    public FindDevelopersByLanguage(View view, QueryExecutorImpl queryExecutor) {
-        this.view = view;
-        this.queryExecutor = new QueryExecutorImpl ();
+
+    public FindDevelopersByLanguage(View view, Map<String, Command> commands, QueryExecutorImpl queryExecutor) {
+        super (view, commands, queryExecutor);
     }
 
     @Override
@@ -20,9 +20,12 @@ public class FindDevelopersByLanguage implements Command {
     }
 
     @Override
+    public String description() {
+        return "find developers by language";
+    }
+
+    @Override
     public void process() {
-            view.write("Choose languade");
-            String skill  = view.read();
-        System.out.println (queryExecutor.getDevelopersBySkill (skill));
+        super.getDevelopersBySkill ();
     }
 }

@@ -9,16 +9,20 @@ import java.lang.reflect.Modifier;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+import ua.goit.controller.DataBaseConnection;
 import ua.goit.model.BaseEntity;
-import ua.goit.utils.DataBaseConnection;
 import ua.goit.utils.PropertiesLoader;
 
  public class CrudRepositoryImpl<E extends BaseEntity<ID>, ID> implements Closeable, CrudRepository<E, ID> {
@@ -100,34 +104,23 @@ import ua.goit.utils.PropertiesLoader;
          deletePreparedStatement.executeUpdate();
      }
 
-//     @Override
-//     public List<E> saveAll(Iterable<E> itrb) {
-//         final List<E> result = new ArrayList<>();
-//         for (E e : itrb) result.add(save(e));
-//         return result;
-//     }
-//
-//     @SneakyThrows
-//     public E save(E e) {
-//         if (e.getId() == null || !findById(e.getId()).isPresent()) {
-//             return executeStatement(createPreparedStatement, e);
-//         } else {
-//             updatePreparedStatement.setObject(columnFieldName.size() + 1, e.getId());
-//             return executeStatement(updatePreparedStatement, e);
-//         }
-//     }
+     @Override
+     public List<E> saveAll(Iterable<E> itrb) {
+         final List<E> result = new ArrayList<>();
+         for (E e : itrb) result.add(save(e));
+         return result;
+     }
 
-    @Override
-     public E create(E e) {
-        return executeStatement(createPreparedStatement, e);
-    }
+     @SneakyThrows
+     public E save(E e) {
+         if (e.getId() == null || !findById(e.getId()).isPresent()) {
+             return executeStatement(createPreparedStatement, e);
+         } else {
+             updatePreparedStatement.setObject(columnFieldName.size() + 1, e.getId());
+             return executeStatement(updatePreparedStatement, e);
+         }
+     }
 
-    @SneakyThrows
-    @Override
-    public E update(E e) {
-        updatePreparedStatement.setObject(columnFieldName.size() + 1, e.getId());
-        return executeStatement(updatePreparedStatement, e);
-    }
 
      @SneakyThrows
      private E executeStatement(PreparedStatement statement, E e) {
@@ -144,9 +137,9 @@ import ua.goit.utils.PropertiesLoader;
 
      @SneakyThrows
      private List<E> parse(ResultSet resultSet) {
-         final List<E> result = new ArrayList<>();
+         final List<E> result = new ArrayList<> ();
          while (resultSet.next()) {
-             final Map<String, Object> objectMap = new HashMap<>();
+             final Map<String, Object> objectMap = new HashMap<> ();
              for (String fieldName : columnFieldName.keySet()) {
                  objectMap.put(columnFieldName.get(fieldName), resultSet.getObject(fieldName));
              }
