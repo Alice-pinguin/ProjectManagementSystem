@@ -18,14 +18,15 @@ public class QueryExecutorImpl implements QueryExecutor{
   private  CrudRepository<Project, Long> projectRepository = RepositoryFactory.of(Project.class);
   private  List<Developer> developerList = new ArrayList<> ();
   private final Connection connection = DataBaseConnection.getInstance ().getConnection ();
-  private final Statement statement;
+  private  Statement statement;
     {
         try {
-            statement = connection.createStatement();
+            statement = connection.createStatement ();
         } catch (SQLException e) {
-           throw new RuntimeException ();
+
         }
     }
+
 
     @SneakyThrows
     @Override

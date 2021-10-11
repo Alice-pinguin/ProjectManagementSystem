@@ -10,8 +10,8 @@ import java.util.Map;
 public class DevelopersFromProjectCommand extends QueryCommand {
 
 
-    public DevelopersFromProjectCommand(View view, Map<String, Command> commands, QueryExecutor queryExecutor) {
-        super (view, commands, queryExecutor);
+    public DevelopersFromProjectCommand(View view, Map<String, Command> commands) {
+        super (view, commands);
     }
 
     @Override

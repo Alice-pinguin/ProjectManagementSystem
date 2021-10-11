@@ -15,11 +15,7 @@ public class Application {
     public static void main(String[] args)  {
      // ScriptExecutor.start();
        ConsoleController consoleController = new ConsoleController (new Console ());
-     consoleController.process ();
-//QueryExecutor queryExecutor = new QueryExecutorImpl ();
-//       System.out.println (queryExecutor.getListOfDevelopersFromProject (2L));
-
-
+consoleController.process ();
    }
 
     }

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class ConsoleController {
 
-    private View view;
+    private final View view;
     private final Map<String, Command> commands;
 
     @SneakyThrows
@@ -22,7 +22,7 @@ public class ConsoleController {
     public void process() {
         view.write ("Welcome to JDBC database application");
         while (true) {
-            view.write ("Enter the command or help for showing all commands.");
+            view.write ("Enter the command or 'help' for showing all commands.");
             Optional.ofNullable (commands.get (view.read ())).ifPresent (Command::process);
         }
     }

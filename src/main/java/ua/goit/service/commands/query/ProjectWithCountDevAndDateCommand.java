@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class ProjectWithCountDevAndDateCommand extends QueryCommand {
 
-    public ProjectWithCountDevAndDateCommand(View view, Map<String, Command> commands, QueryExecutor queryExecutor) {
-        super (view, commands, queryExecutor);
+    public ProjectWithCountDevAndDateCommand(View view, Map<String, Command> commands) {
+        super (view, commands);
     }
 
     @Override

@@ -2,6 +2,7 @@ package ua.goit.service.commands;
 
 import ua.goit.model.BaseEntity;
 import ua.goit.repository.QueryExecutor;
+import ua.goit.repository.QueryExecutorImpl;
 import ua.goit.view.View;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,11 @@ public abstract class QueryCommand<E extends BaseEntity<ID>, ID> implements Comm
 
     protected final View view;
     protected final Map<String, Command> commands;
-    private final QueryExecutor queryExecutor;
+    protected  QueryExecutor<E, ID> queryExecutor  = new QueryExecutorImpl ();
 
-    public QueryCommand(View view, Map<String, Command> commands, QueryExecutor queryExecutor) {
+    public QueryCommand(View view, Map<String, Command> commands) {
         this.view = view;
         this.commands = commands;
-        this.queryExecutor = queryExecutor;
 
         }
 
