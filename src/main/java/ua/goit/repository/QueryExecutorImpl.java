@@ -88,9 +88,9 @@ public class QueryExecutorImpl implements QueryExecutor{
     }
 
     @Override
-    public List projectWithCountDevAndDate()  {
+    public List projectWithCountDevAndDate(Long id)  {
         return projectRepository.findAll().stream()
-                .map(p -> p.getCreateDate ().toString() + " - " + p.getName() + " - " + getListOfDevelopersFromProject (p.getId ()).size() + ".")
+                .map(p -> p.getCreateDate ().toString() + " - " + p.getName() + " - " + getListOfDevelopersFromProject(id).size ()+".")
                 .collect(Collectors.toList());
     }
 

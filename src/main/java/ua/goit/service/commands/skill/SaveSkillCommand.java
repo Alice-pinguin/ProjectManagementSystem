@@ -1,22 +1,20 @@
-package ua.goit.service.skill;
-
+package ua.goit.service.commands.skill;
 
 import ua.goit.model.Skill;
 import ua.goit.service.commands.Command;
 import ua.goit.service.commands.CrudCommand;
 import ua.goit.view.View;
-
 import java.util.Map;
 
-public class SaveSkill extends CrudCommand {
+public class SaveSkillCommand extends CrudCommand {
 
-    public SaveSkill(View view, Map<String, Command> commands) {
+    public SaveSkillCommand(View view, Map<String, Command> commands) {
         super (view, commands, Skill.class);
     }
 
         @Override
     public String commandName() {
-        return "Save skill";
+        return "save_skill";
     }
 
     @Override

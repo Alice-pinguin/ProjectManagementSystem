@@ -10,21 +10,20 @@ import java.util.Optional;
 
 public class ConsoleController {
 
-    private final View view;
+    private View view;
     private final Map<String, Command> commands;
 
     @SneakyThrows
     public ConsoleController(View view) {
         this.view = view;
-        this.commands = Command.of(view);
+        this.commands = Command.of (view);
     }
 
     public void process() {
-        view.write("Welcome to database JDBC application");
+        view.write ("Welcome to JDBC database application");
         while (true) {
-            view.write("Enter the command 'help' for read all list of command.");
-            Optional.ofNullable(commands.get(view.read())).ifPresent(Command::process);
+            view.write ("Enter the command or help for showing all commands.");
+            Optional.ofNullable (commands.get (view.read ())).ifPresent (Command::process);
         }
     }
-
 }

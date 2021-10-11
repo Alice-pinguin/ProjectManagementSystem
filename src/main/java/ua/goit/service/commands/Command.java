@@ -19,13 +19,14 @@ public interface Command {
 
     @SneakyThrows
     static Map<String, Command> of(View view) {
-        Set<Class<? extends Command>> commandClasses = new Reflections ("ua.goit").getSubTypesOf (Command.class);
-        Map<String, Command> commands = new HashMap<> (commandClasses.size ());
-        for (Class<? extends Command> commandClass : commandClasses) {
-            if (Modifier.isAbstract (commandClass.getModifiers ()) || commandClass.isInterface ()) continue;
-            Command command = commandClass.getConstructor (View.class, Map.class).newInstance (view, commands);
-            commands.put (command.commandName (), command);
+        Set<Class<? extends Command>> commandClasses = new Reflections("ua.goit").getSubTypesOf(Command.class);
+        Map<String, Command> commands = new HashMap<>(commandClasses.size());
+        for (Class<? extends Command> commandClass : commandClasses ){
+            if(Modifier.isAbstract(commandClass.getModifiers()) || commandClass.isInterface()) continue;
+            Command command = commandClass.getConstructor(View.class, Map.class).newInstance(view,commands);
+            commands.put(command.commandName(), command);
         }
         return commands;
     }
+
 }

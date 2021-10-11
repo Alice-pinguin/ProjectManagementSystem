@@ -1,29 +1,27 @@
-package ua.goit.service.project;
+package ua.goit.service.commands.project;
 
 import ua.goit.model.Project;
 import ua.goit.service.commands.Command;
 import ua.goit.service.commands.CrudCommand;
-
 import ua.goit.view.View;
 
 import java.util.Map;
 
+public class DeleteByIdProjectCommand extends CrudCommand {
 
-public class DeleteProject extends CrudCommand {
-
-    public DeleteProject(View view, Map<String, Command> commands) {
-        super (view, commands, Project.class);
+    public DeleteByIdProjectCommand(View view, Map<String, Command> commands) {
+        super(view, commands, Project.class);
     }
 
     @Override
     public void process() {
-        super.deleteById ();
+        super.deleteById();
     }
 
     @Override
     public String commandName() {
-        return "Delete project";
-}
+        return "delete_by_id_project";
+    }
 
     @Override
     public String description() {

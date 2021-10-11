@@ -13,11 +13,11 @@ public class Application {
 
    @SneakyThrows
     public static void main(String[] args)  {
-      //ScriptExecutor.start();
+     // ScriptExecutor.start();
        ConsoleController consoleController = new ConsoleController (new Console ());
      consoleController.process ();
-
-
+//QueryExecutor queryExecutor = new QueryExecutorImpl ();
+//       System.out.println (queryExecutor.getListOfDevelopersFromProject (2L));
 
 
    }

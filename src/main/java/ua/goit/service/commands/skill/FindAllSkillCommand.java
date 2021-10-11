@@ -1,4 +1,4 @@
-package ua.goit.service.skill;
+package ua.goit.service.commands.skill;
 
 import ua.goit.model.Skill;
 import ua.goit.service.commands.Command;
@@ -7,15 +7,15 @@ import ua.goit.view.View;
 
 import java.util.Map;
 
-public class FindAllSkill extends CrudCommand {
+public class FindAllSkillCommand extends CrudCommand {
 
-    public FindAllSkill(View view, Map<String, Command> commands) {
+    public FindAllSkillCommand(View view, Map<String, Command> commands) {
         super (view, commands, Skill.class);
     }
 
     @Override
     public String commandName() {
-        return "Find all skills";
+        return "find_all_skills";
     }
 
     @Override

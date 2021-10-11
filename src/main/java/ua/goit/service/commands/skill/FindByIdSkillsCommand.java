@@ -1,27 +1,26 @@
-package ua.goit.service.customer;
+package ua.goit.service.commands.skill;
 
-import ua.goit.model.Customer;
+import ua.goit.model.Skill;
 import ua.goit.service.commands.Command;
 import ua.goit.service.commands.CrudCommand;
 import ua.goit.view.View;
-
 import java.util.Map;
 
 
-public class FindByIdCustomer extends CrudCommand {
+public class FindByIdSkillsCommand extends CrudCommand {
 
-    public FindByIdCustomer(View view, Map<String, Command> commands) {
-        super (view, commands, Customer.class);
+    public FindByIdSkillsCommand(View view, Map<String, Command> commands) {
+        super (view, commands, Skill.class);
     }
 
     @Override
     public String commandName() {
-        return "Find by ID customer";
+        return "find_by_id_skill";
     }
 
     @Override
     public String description() {
-        return "find a customer by ID";
+        return "Find a skill by ID";
     }
 
     @Override

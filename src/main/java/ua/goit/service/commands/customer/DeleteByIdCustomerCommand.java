@@ -1,29 +1,27 @@
-package ua.goit.service.customer;
+package ua.goit.service.commands.customer;
 
 import ua.goit.model.Customer;
 import ua.goit.service.commands.Command;
 import ua.goit.service.commands.CrudCommand;
-
 import ua.goit.view.View;
 
 import java.util.Map;
 
+public class DeleteByIdCustomerCommand extends CrudCommand {
 
-public class DeleteCustomer extends CrudCommand {
-
-    public DeleteCustomer(View view, Map<String, Command> commands) {
-        super (view, commands, Customer.class);
+    public DeleteByIdCustomerCommand(View view, Map<String, Command> commands) {
+        super(view, commands, Customer.class);
     }
 
     @Override
     public void process() {
-        super.deleteById ();
+        super.deleteById();
     }
 
     @Override
     public String commandName() {
-        return "Delete customer";
-}
+        return "delete_by_id_customer";
+    }
 
     @Override
     public String description() {

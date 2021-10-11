@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 public abstract class CrudCommand<E extends BaseEntity<ID>, ID> implements Command {
 
     private final CrudRepository<E, ID> crudRepository;
@@ -29,19 +30,19 @@ public abstract class CrudCommand<E extends BaseEntity<ID>, ID> implements Comma
     }
 
     protected void findById() {
-        view.write("Enter ID");
+        view.write("Введите ID");
         Optional<E> result = crudRepository.findById((ID) view.read());
         sendResult(result.isPresent(), result);
     }
 
     protected void deleteById() {
-        view.write("Enter ID deleting entity");
+        view.write("Enter ID entity");
         crudRepository.deleteById((ID) view.read());
-        view.write("Объект с ID: " + view.read() + " deleted");
+        view.write("Entity with ID: " + view.read() + " deleted");
     }
 
     protected void save(E entity) {
-        view.write("You save - " + entity);
+        view.write("You saved - " + entity);
         crudRepository.save(entity);
     }
 
@@ -56,4 +57,3 @@ public abstract class CrudCommand<E extends BaseEntity<ID>, ID> implements Comma
     }
 
 }
-

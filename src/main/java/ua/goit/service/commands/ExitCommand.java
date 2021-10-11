@@ -14,7 +14,7 @@ public class ExitCommand implements Command{
 
     @Override
     public void process() {
-        view.write("Good Luck");
+        view.write("Good luck");
         System.exit(0);
     }
 
@@ -25,6 +25,6 @@ public class ExitCommand implements Command{
 
     @Override
     public String description() {
-        return "Exit of the application";
+        return "exit";
     }
 }

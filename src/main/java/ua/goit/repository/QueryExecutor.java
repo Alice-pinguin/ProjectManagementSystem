@@ -13,7 +13,7 @@ public interface QueryExecutor<E extends BaseEntity<ID>, ID> {
 
     List<E> getDeveloperByLevel(String level);
 
-    List<E> projectWithCountDevAndDate();
+    List<E> projectWithCountDevAndDate(Long id);
 
 }
 
