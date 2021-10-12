@@ -1,21 +1,21 @@
 package ua.goit.repository;
 
-
 import lombok.SneakyThrows;
 import ua.goit.controller.DataBaseConnection;
+import ua.goit.dto.ProjectDevDto;
 import ua.goit.model.Developer;
 import ua.goit.model.Project;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class QueryExecutorImpl implements QueryExecutor{
 
-  private  CrudRepository<Project, Long> projectRepository = RepositoryFactory.of(Project.class);
   private  List<Developer> developerList = new ArrayList<> ();
   private final Connection connection = DataBaseConnection.getInstance ().getConnection ();
   private  Statement statement;
@@ -26,7 +26,6 @@ public class QueryExecutorImpl implements QueryExecutor{
 
         }
     }
-
 
     @SneakyThrows
     @Override
@@ -88,11 +87,24 @@ public class QueryExecutorImpl implements QueryExecutor{
         return developerList;
     }
 
+    @SneakyThrows
     @Override
-    public List projectWithCountDevAndDate(Long id)  {
-        return projectRepository.findAll().stream()
-                .map(p -> p.getCreateDate ().toString() + " - " + p.getName() + " - " + getListOfDevelopersFromProject(id).size ()+".")
-                .collect(Collectors.toList());
+    public List projectWithCountDevAndDate()  {
+        List projects = new ArrayList ();
+        String query = "SELECT p.id, p.create_date, p.name, count(d.name) AS quantity FROM  projects p" +
+                " JOIN  developers_projects dp ON  p.id = dp.id_project " +
+                " JOIN  developers d on d.id = dp.id_developer " +
+                "GROUP BY  p.name order by p.create_date";
+        ResultSet resultSet = statement.executeQuery (query);
+        while (resultSet.next ()) {
+            ProjectDevDto project = ProjectDevDto.builder ()
+                    .projectName(resultSet.getString ("name"))
+                    .projectDate(resultSet.getString ("create_date"))
+                    .devCount(resultSet.getInt ("quantity"))
+                    .build ();
+            projects.add (project);
+        }
+        return projects;
     }
 
 }

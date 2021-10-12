@@ -14,7 +14,7 @@ public class Console implements View {
 
     @Override
     public String read() {
-        return scanner.nextLine().trim().toLowerCase();
+        return scanner.nextLine().trim();
     }
 
     @Override

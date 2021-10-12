@@ -4,14 +4,16 @@ import ua.goit.model.BaseEntity;
 import ua.goit.repository.QueryExecutor;
 import ua.goit.repository.QueryExecutorImpl;
 import ua.goit.view.View;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public abstract class QueryCommand<E extends BaseEntity<ID>, ID> implements Command {
+public abstract class QueryCommand implements Command {
 
     protected final View view;
     protected final Map<String, Command> commands;
-    protected  QueryExecutor<E, ID> queryExecutor  = new QueryExecutorImpl ();
+    protected  QueryExecutor queryExecutor  = new QueryExecutorImpl ();
 
     public QueryCommand(View view, Map<String, Command> commands) {
         this.view = view;
@@ -35,14 +37,12 @@ public abstract class QueryCommand<E extends BaseEntity<ID>, ID> implements Comm
    protected void getDevelopersByLevel () {
             view.write ("Enter the level");
             String level = view.read ();
-            List result = queryExecutor.getDevelopersBySkill (level);
+            List result = queryExecutor.getDeveloperByLevel (level);
             sendResult (!result.isEmpty (), result);
 
         }
    protected void getProjectWithCountDevAndDate () {
-            view.write ("Enter ID");
-            Long id = Long.valueOf (view.read ());
-            List result = queryExecutor.projectWithCountDevAndDate (id);
+            List result = queryExecutor.projectWithCountDevAndDate ();
             sendResult (!result.isEmpty (), result);
         }
   protected void getListOfDevelopersFromProject () {
@@ -53,13 +53,10 @@ public abstract class QueryCommand<E extends BaseEntity<ID>, ID> implements Comm
         }
 
    private void sendResult (Boolean isDone, Object...result){
-            if (isDone) view.write (String.valueOf (result));
+            if (isDone) view.write (Arrays.toString (result));
             else view.write ("Sorry, for your request doesn't find any entity");
         }
 
-   private void sendResult (Boolean isDone, List result){
-            sendResult (isDone, result.toArray ());
-        }
 
     }
 
