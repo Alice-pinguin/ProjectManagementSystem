@@ -26,6 +26,6 @@ public class FindAllDeveloperCommand extends CrudCommand {
 
     @Override
     public String description() {
-        return "список всех разработчиков";
+        return "list of all developers";
     }
 }
