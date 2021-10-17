@@ -14,9 +14,6 @@ import java.util.List;
 
 public class QueryExecutorImpl implements QueryExecutor{
 
-  private  List<Developer> developerList = new ArrayList<> ();
-  private  List<Developer> developerLanguage = new ArrayList<> ();
-  private  List<Developer> developerLevel = new ArrayList<> ();
   private final Connection connection = DataBaseConnection.getInstance ().getConnection ();
   private  Statement statement;
     {
@@ -45,7 +42,7 @@ public class QueryExecutorImpl implements QueryExecutor{
     public List<Developer> getListOfDevelopersFromProject(Long id)  {
         String query = "SELECT * FROM jdbc.developers d, jdbc.projects p, jdbc.developers_projects dp" +
                 " where  d.id=dp.id_developer and p.id = dp.id_project and p.id ='" +id +"'";
-        return getDevelopers (query, developerList);
+        return getDevelopers (query);
     }
 
     @SneakyThrows
@@ -55,7 +52,7 @@ public class QueryExecutorImpl implements QueryExecutor{
                 "INNER JOIN jdbc.developers_skills ds ON d.id = ds.id_developer " +
                 "INNER JOIN jdbc.skills s ON ds.id_skill = s.id" +
                 " WHERE s.language ='" + skill + "'";
-        return getDevelopers (query, developerLanguage);
+        return getDevelopers (query);
     }
 
     @SneakyThrows
@@ -65,11 +62,11 @@ public class QueryExecutorImpl implements QueryExecutor{
                 "INNER JOIN jdbc.developers_skills ds ON d.id = ds.id_developer " +
                 "INNER JOIN jdbc.skills s ON ds.id_skill = s.id" +
                 " WHERE s.level ='" + level + "'";
-        return getDevelopers (query, developerLevel);
+        return getDevelopers (query);
     }
 
    @SneakyThrows
-    private List<Developer> getDevelopers(String query, List<Developer> developerLevel)  {
+    private List<Developer> getDevelopers(String query)  {
         List<Developer> developers = new ArrayList<> ();
         ResultSet resultSet = statement.executeQuery (query);
         while (resultSet.next ()) {
