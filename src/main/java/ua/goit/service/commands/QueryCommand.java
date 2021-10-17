@@ -1,6 +1,5 @@
 package ua.goit.service.commands;
 
-import ua.goit.model.BaseEntity;
 import ua.goit.repository.QueryExecutor;
 import ua.goit.repository.QueryExecutorImpl;
 import ua.goit.view.View;
