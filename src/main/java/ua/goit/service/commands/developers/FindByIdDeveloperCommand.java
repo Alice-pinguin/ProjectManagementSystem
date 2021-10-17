@@ -25,6 +25,6 @@ public class FindByIdDeveloperCommand extends CrudCommand {
 
     @Override
     public String description() {
-        return "найти разработчика по ID";
+        return "find developer by ID";
     }
 }

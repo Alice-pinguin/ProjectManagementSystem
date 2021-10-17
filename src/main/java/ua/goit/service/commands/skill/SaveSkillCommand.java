@@ -28,6 +28,7 @@ public class SaveSkillCommand extends CrudCommand {
                 .language (view.read())
                 .level (view.read())
                 .build();
+        super.save(skill);
 
     }
 }
