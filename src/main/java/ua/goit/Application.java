@@ -14,13 +14,13 @@ public class Application {
    @SneakyThrows
     public static void main(String[] args) {
 //        ScriptExecutor.start();
-//         ConsoleController consoleController = new ConsoleController (new Console ());
-//consoleController.process ();
+         ConsoleController consoleController = new ConsoleController (new Console ());
+consoleController.process ();
 
-       QueryExecutorImpl queryExecutor = new QueryExecutorImpl ();
-       System.out.println (queryExecutor.getDeveloperByLevel ("Senior"));
-       System.out.println (queryExecutor.getDeveloperByLevel ("Middle"));
-       System.out.println (queryExecutor.getDevelopersBySkill ("Java"));
+//       QueryExecutorImpl queryExecutor = new QueryExecutorImpl ();
+//       System.out.println (queryExecutor.getDeveloperByLevel ("Senior"));
+//       System.out.println (queryExecutor.getDeveloperByLevel ("Middle"));
+//       System.out.println (queryExecutor.getDevelopersBySkill ("Java"));
    }
     }
 
